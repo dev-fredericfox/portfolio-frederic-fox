@@ -1,0 +1,164 @@
+<div class="dust particleA"></div>
+<div class="dust particleA"></div>
+<div class="dust particleA"></div>
+<div class="dust particleA"></div>
+<div class="dust particleA"></div>
+<div class="dust particleB"></div>
+<div class="dust particleB"></div>
+<div class="dust particleB"></div>
+<div class="dust particleB"></div>
+<div class="dust particleB"></div>
+<div class="dust particleB"></div>
+<div class="dust particleC"></div>
+<div class="dust particleC"></div>
+<div class="dust particleC"></div>
+<div class="dust particleC"></div>
+<div class="dust particleC"></div>
+<div class="dust particleC"></div>
+<div class="dust particleC"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<div class="dust particle1by1"></div>
+<style lang="scss">
+
+$particulatecolorOne: rgba(67, 189, 230, 1);
+$particulatecolorMidpoint: rgba(35,222,241,1);
+$particulatecolorTwo: rgba(2, 255, 252, 1);
+
+
+.dust {
+  position: absolute;
+  backface-visibility: hidden;
+  perspective: 1000;
+  margin: 3px;
+}
+
+  @for $i from 1 through 68 {
+    $randomPosY: random(100) + 0%;
+    $randomPosX: random(100) + 0%;
+    $randomPosYb: random(100) + 0%;
+    $randomPosXb: random(100) + 0%;
+    $randomPosYc: random(100) + 0%;
+    $randomPosXc: random(100) + 0%;
+    $randomPosY1x1: random(100) + 0%;
+    $randomPosX1x1: random(100) + 0%;
+    $randomSize: random(20) * 0.1+0%;
+    $randomRadius1: random(50) + 50%;
+    $randomRadius2: random(50) + 50%;
+    $randomRadius3: random(50) + 50%;
+    $randomRadius4: random(50) + 50%;
+    .particleA:nth-child(#{$i}) {
+      top: $randomPosY;
+      left: $randomPosX;
+      border-radius: 50%;
+      height: $randomSize + 1%;
+      width: $randomSize + 1.5%;
+      background: $particulatecolorOne;
+      animation: orbit#{$i} 12s alternate infinite;
+    }
+    .particleB:nth-child(#{$i}) {
+      top: $randomPosYb;
+      left: $randomPosXb;
+      border-radius: #{$randomRadius1}
+        #{$randomRadius2}
+        #{$randomRadius3}
+        #{$randomRadius4} /
+        60%
+        60%
+        40%
+        40%;
+      height: $randomSize + 0%;
+      width: $randomSize + 0%;
+      transfrom: rotate(-30deg);
+      background: $particulatecolorOne;
+      animation: orbit#{$i} 11s alternate infinite;
+    }
+    .particleC:nth-child(#{$i}) {
+      top: $randomPosYc;
+      left: $randomPosXc;
+      border-radius: #{$randomRadius1}
+        #{$randomRadius2}
+        #{$randomRadius3}
+        #{$randomRadius4} /
+        60%
+        60%
+        40%
+        40%;
+      height: $randomSize + 0.5%;
+      width: $randomSize + 1%;
+      transfrom: rotate(-45deg);
+      background: $particulatecolorMidpoint;
+      animation: orbit#{$i} 10s alternate infinite;
+    }
+    .particle1by1:nth-child(#{$i}) {
+      top: $randomPosY1x1;
+      left: $randomPosX1x1;
+      border-radius: 50%;
+      height: 1%;
+      width: 1%;
+      background: $particulatecolorTwo;
+      animation: orbit#{$i} 9s alternate infinite;
+    }
+
+    $randomY: random(15) + px;
+    $randomX: random(15) + px;
+    $randomYalt: random(15) + px;
+    $randomXalt: random(15) + px;
+
+    @keyframes orbit#{$i} {
+      33% {
+        transform: translate3d($randomX,$randomY,0);
+      }
+      66% {
+        transform: translate3d($randomXalt,$randomYalt,0);
+      }
+    }
+  }
+</style>

@@ -1,0 +1,40 @@
+[{
+	"title": "TBD",
+	"number": "V",
+	"stack": "TBD</p>",
+	"description": "<p>TBD</p>",
+	"github": "https://github.com/dev-fredericfox/tbd",
+	"web": "https://tbd.com"
+},
+{
+	"title": "Brain.js Machine Learning Companion App",
+	"number": "IV",
+	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | JS Workers</p>",
+	"description": "<p>Train machine learning data in your browser</p>",
+	"github": "https://github.com/dev-fredericfox/stk.market",
+	"web": "https://stk.market/AAPL"
+},
+{
+	"title": "curl stockmarket quotes",
+	"number": "III",
+	"stack": "<p><b>EN</b></p><p> Express | Node.js</p><p>Firebase | Yahoo!Finance API</p>",
+	"description": "<p>Get stockmarket quotes direclty to your terminal through a curl request.</p><code>curl https://stk.market/TSLA</code><p>It works with any NASDAQ Symbol. Don't have a terminal on hand? Visit the website, it works as well!</p>",
+	"github": "https://github.com/dev-fredericfox/stk.market",
+	"web": "https://stk.market/AAPL"
+},
+{
+	"title": "The English Nook",
+	"number": "II",
+	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | Astro | GitHub pages</p>",
+	"description": "<p>Personal Website for a Translator and English Teacher</p>",
+	"github": "https://github.com/dev-fredericfox/theenglishnook.ch",
+	"web": "https://www.theenglishnook.ch"
+},
+{
+	"title": "Node.js Form Handler",
+	"number": "I",
+	"stack": "<p><b>Node</b></p><p> Node.js | Formhandler | Firebase</p>",
+	"description": "<p>Backend to handle form submits. Repo has been set to private for the moment. You can check out how it works by submiting the contact form on this website. Link below.</p>",
+	"github": "https://github.com/dev-fredericfox/PrivateFormEmailHandler/",
+	"web": "/contact-frederic-fox"
+}]

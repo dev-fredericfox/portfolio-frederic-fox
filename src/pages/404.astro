@@ -1,0 +1,37 @@
+---
+import MainTheme from '../layouts/MainTheme.astro';
+import Error from '../components/404blackhole.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<MainTheme>
+  <Error client:load />
+  <div class="overlay">
+    <div class="content">
+      <div class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title is-5">404: The requested page has disappeared...</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footerwrapper">
+    <Footer />
+  </div>
+</MainTheme>
+
+<style lang="scss">
+  .overlay {
+    position: absolute;
+    display: block;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  .footerwrapper {
+    position: absolute;
+    display: block;
+    width: 100vw;
+    bottom: 0;
+  }
+</style>

@@ -1,0 +1,322 @@
+<script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three@latest';
+  // import { OrbitControls } from 'https://cdn.skypack.dev/three@latest/examples/jsm/controls/OrbitControls';
+  import { GLTFLoader } from 'https://cdn.skypack.dev/three@latest/examples/jsm/loaders/GLTFLoader.js';
+  import {EffectComposer} from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/EffectComposer.js';
+  import {RenderPass} from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/RenderPass.js';
+  import {FilmPass} from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/FilmPass.js';
+  import {BloomPass} from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/BloomPass.js';
+
+  // Setup > Objects > Lead Textures
+  
+
+  const main = function () {
+    // Setup
+    const canvas = document.querySelector('#bg');
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+      alpha: true,
+    });
+    const scene = new THREE.Scene();
+    // scene.background = new THREE.Color('black');
+
+    // Setup > Camera
+    const fov = 40;
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 0.1;
+    const far = 2000;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.left = -canvas.width / 2;
+    camera.right = canvas.width / 2;
+    camera.top = canvas.height / 2;
+    camera.bottom = -canvas.height / 2;
+    camera.position.z = 1;
+    camera.up.set(1, 0, 0);
+    // Setup > Light > Ambient Light
+    const ambientLightcolor = 0xffffff;
+    const ambientLightintensity = 1;
+    const ambientLight = new THREE.AmbientLight(
+      ambientLightcolor,
+      ambientLightintensity
+    );
+    scene.add(ambientLight);
+
+    // Setup > Helpers
+    // const controls = new OrbitControls(camera, renderer.domElement);
+    // const helper = {
+    //   grid: new THREE.GridHelper(200, 50),
+    // };
+    // scene.add(helper.grid);
+    // scene.add(helper.camera);
+
+
+    // Setup > Scenes
+
+    // Setup > Scene > SolarSystem (sun)
+    const world = new THREE.Object3D();
+    // world.rotation.x = -1.4;
+    // world.rotation.z = -1.55;
+    // Increase to rotate horizontally left (look left)
+    world.rotation.y = 0.3;
+    // Increase to move the model right
+    world.position.x = -0.01;
+    // Increase to move the model up
+    world.position.y = -0.55;
+    // Increase to move closer to camera
+    world.position.z = 0;
+    scene.add(world);
+
+    // Debug / Analyse glb file for animations - also needed to animate the parts.
+    const dumpObject = function(obj, lines = [], isLast = true, prefix = '') {
+      const localPrefix = isLast ? '└─' : '├─';
+      lines.push(
+        `${prefix}${prefix ? localPrefix : ''}${obj.name || '*no-name*'} [${
+          obj.type
+        }]`
+      );
+      const newPrefix = prefix + (isLast ? '  ' : '│ ');
+      const lastNdx = obj.children.length - 1;
+      obj.children.forEach((child, ndx) => {
+        const isLast = ndx === lastNdx;
+        dumpObject(child, lines, isLast, newPrefix);
+      });
+      return lines;
+    }
+
+    // Hologram Beam
+    const beam = {
+      radiusBottom: 0.8,
+      radiusTop: 1.5,
+      height: 4.5,
+      radialSegments: 50
+    }
+    
+    const beamGeometry = new THREE.CylinderGeometry(beam.radiusTop, beam.radiusBottom, beam.height, beam.radialSegments);
+        const beamMaterial = new THREE.MeshLambertMaterial({
+        color: 0x8ec1ed,
+        transparent: true,
+        opacity: 0.2
+    });
+
+    const beamMesh = new THREE.Mesh(beamGeometry, beamMaterial);
+    beamMesh.scale.set(0.1,0.1,0.1)
+    // Increase to move the beam up
+    beamMesh.position.y = 0.56
+    // Increase to move the beam right
+    beamMesh.position.x = -0.005
+    // beamMesh.rotation.z = 3.14
+    world.add(beamMesh)
+
+
+    // Head Model
+    const gltfLoader = new GLTFLoader();
+    let head;
+    let lHand;
+    let rHand;
+    gltfLoader.load(
+      // resource URL
+      '/assets/about/models/AvatarGlassesBlue.glb',
+      // called when the resource is loaded
+      function (gltf) {
+        let root = gltf.scene;
+        world.add(root);
+        console.log(dumpObject(gltf.scene).join('\n'));
+        head = root.getObjectByName('Head');
+        lHand = root.getObjectByName('LeftHand');
+        rHand = root.getObjectByName('RightHand');
+
+        gltf.animations; // Array<THREE.AnimationClip>
+        gltf.scene; // THREE.Group
+        gltf.scenes; // Array<THREE.Group>
+        gltf.cameras; // Array<THREE.Camera>
+        gltf.asset; // Object
+      },
+      // called while loading is progressing
+      function (xhr) {
+        console.log((xhr.loaded / xhr.total) * 100 + '% loaded');
+      },
+      // called when loading has errors
+      function (error) {
+        console.log('An error happened');
+      }
+    );
+
+    // Setup Responsive Display
+    function resizeRendererToDisplaySize(renderer) {
+      const canvas = renderer.domElement;
+      const width = 300;
+      const height = 300;
+      const needResize = canvas.width !== width || canvas.height !== height;
+      if (needResize) {
+        renderer.setSize(width, height, false);
+        composer.setSize(canvas.width, canvas.height);
+
+      }
+      return needResize;
+    }
+
+    const resizeCanvas = () => {
+      if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+      }
+    };
+
+    let rotateRight = true;
+
+    const rotateHeadLeft = () => {
+      if (head && head.rotation.y < 0.25 && rotateRight == true) {
+        head.rotation.y += 0.003;
+      } else if (head && head.rotation.y >= 0.25 && rotateRight === true) {
+        rotateRight = false;
+      }
+    };
+
+    const rotateHeadRight = () => {
+      if (head && head.rotation.y > -0.25 && rotateRight == false) {
+        head.rotation.y = head.rotation.y - 0.003;
+      } else if (head && head.rotation.y <= -0.25 && rotateRight === false) {
+        rotateRight = true;
+      }
+    };
+
+    const rotateStraight = () => {
+      if (head && head.rotation.y > -0.26 && head.rotation.y <= -0.01) {
+        head.rotation.y += 0.003;
+      } else if (head && head.rotation.y < 0.25 && head.rotation.y >= 0.01) {
+        head.rotation.y -= 0.003;
+      }
+    };
+
+    const lookRight = () => {
+      if (head) {
+        for (const eyes of head.children) {
+          if (eyes.rotation.z < 3.25) {
+            eyes.rotation.z += 0.1;
+          }
+        }
+      }
+    };
+
+    const lookLeft = () => {
+      if (head) {
+        for (const eyes of head.children) {
+          if (eyes.rotation.z > 2.85) {
+            eyes.rotation.z -= 0.1;
+          }
+        }
+      }
+    };
+
+    const lookStraight = () => {
+      if (head) {
+        for (const eyes of head.children) {
+          //  console.log(eyes.rotation.z)
+          if (eyes.rotation.z >= 2.84 && eyes.rotation.z <= 3.04) {
+            eyes.rotation.z += 0.1;
+          } else if (eyes.rotation.z <= 3.5 && eyes.rotation.z >= 3.06) {
+            eyes.rotation.z -= 0.1;
+          }
+        }
+      }
+    };
+
+    // Bobs head up and down to look more "alive", like in video games
+    let movingHeadUp = false;
+    const lookAlive = () => {
+      if (head && movingHeadUp) {
+        head.rotation.x += 0.0006;
+        if (head.rotation.x >= 0.036) {
+          movingHeadUp = false;
+        }
+      } else if (head && !movingHeadUp) {
+        head.rotation.x -= 0.0006;
+        if (head.rotation.x <= -0.036) {
+          movingHeadUp = true;
+        }
+      }
+    };
+
+    // Delete hands that are by default part of the model. That way I can change model without modifing the file each time.
+    const removeHands = () => {
+      if (rHand) {
+        rHand.scale.set(0, 0, 0);
+      }
+      if (lHand) {
+        lHand.scale.set(0, 0, 0);
+      }
+    };
+
+    const animateHead = () => {
+      rotateHeadLeft();
+      setTimeout(rotateHeadRight, 2000);
+      setTimeout(rotateStraight, 6000);
+      setTimeout(rotateHeadLeft, 8000);
+      setTimeout(rotateStraight, 12000);
+      setTimeout(animateEyes, 20000);
+    };
+
+    const animateEyes = () => {
+      lookRight();
+      setTimeout(lookLeft, 4000);
+      setTimeout(lookStraight, 8000);
+      setTimeout(lookRight, 12000);
+      setTimeout(lookStraight, 16000);
+      setTimeout(animateHead, 20000);
+    };
+
+    // Filter
+    const composer = new EffectComposer(renderer);
+    composer.addPass(new RenderPass(scene, camera));
+    const bloomPass = new BloomPass(
+    1.2,    // strength
+    25,   // kernel size
+    0.2,    // sigma ?
+    1024,  // blur render target resolution
+    );
+    composer.addPass(bloomPass);
+    const filmPass = new FilmPass(
+    0.35,   // noise intensity
+    0.777,  // scanline intensity
+    500,    // scanline count
+    false,  // grayscale
+);
+    filmPass.renderToScreen = true;
+    composer.addPass(filmPass);
+
+let then = 0;
+    // Recusrive function
+    function render(time) {
+      time *= 0.001;
+      const deltaTime = time - then;
+      then = time;
+
+      removeHands();
+
+      lookAlive();
+
+      if (time > 4 && time < 5) {
+        animateHead();
+      }
+
+      resizeCanvas();
+
+      // renderer.render(scene, camera);
+      composer.render(deltaTime);
+
+      // Helper for Developement (mouse move around scene)
+      // controls.update();
+
+      requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
+  };
+
+  main();
+</script>
+
+<style>
+</style>

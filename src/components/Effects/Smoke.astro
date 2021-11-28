@@ -1,0 +1,95 @@
+<div class="container">
+<svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+viewBox="0 0 50 1" preserveAspectRatio="xMidYMid meet" shape-rendering="auto">
+<defs>
+  <filter id="blurMe">
+    <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+  </filter>
+<path id="smokeA" d="M4-1Q8-5 10-1Q17 0 10 3Q9 9 5 4Q1 6 1 2Q-4-1 4-1" />
+<path id="smokeB" d="M3-2Q10-5 10 0Q17 3 11 8Q9 13 4 7Q-4 8 1 3Q-4-3 3-2" /> 
+</defs>
+<g class="parallax">
+<use xlink:href="#smokeA" x="2" y="0" filter="url(#blurMe)" fill="rgba(255,255,255,0.1" />
+<use xlink:href="#smokeB" x="1" y="0" filter="url(#blurMe)" fill="rgba(255,255,255,0.2)" />
+<use xlink:href="#smokeA" x="0" y="0" filter="url(#blurMe)" fill="rgba(255,255,255,0.3)" />
+<use xlink:href="#smokeB" x="3" y="0" filter="url(#blurMe)" fill="rgba(255,255,255,0.4)" />
+<use xlink:href="#smokeA" x="0" y="0" filter="url(#blurMe)" fill="rgba(255,255,255,0.4)" />
+  </g>
+</svg>
+</div>
+
+<style>
+.container {
+  height: 27.3333vw;
+  min-width: 100vw;
+  position: absolute;
+  right: 0;
+  bottom: 10vh;
+}
+
+
+
+.waves {
+  position:absolute;
+  width: 8vw; 
+  height: 4vw;
+  bottom: 22%;
+  left: 48.6%;
+  transform: scale(1) rotate(-90deg);
+  background: rgba(0,0,0,0);
+}
+
+/* Animation */
+
+.parallax > use {
+  position: fixed;
+  opacity: 0;
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+
+.parallax > use:nth-child(1) {
+  animation-duration: 6s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -1s;
+  animation-duration: 9s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -2s;
+  animation-duration: 12s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -3s;
+  animation-duration: 19s;
+}
+.parallax > use:nth-child(5) {
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(0,0,0) scale(0.3);
+  }
+    20% {
+   transform: translate3d(0.2vw,-1px,0) scale(0.5);
+      opacity: 1;
+  }
+      60% {
+   transform: translate3d(0.6vw,-2px,0) scale(0.9);
+      opacity: 1;
+  }
+  100% { 
+    transform: translate3d(1vw,-3px,0) scale(1.2);
+    opacity: 0;
+  }
+}
+
+
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .container {
+      display:none;
+  }
+}
+
+
+</style>

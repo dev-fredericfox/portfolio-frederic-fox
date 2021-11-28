@@ -1,0 +1,57 @@
+---
+let lightParticle = 140;
+---
+
+<div class="container">
+   {[...Array(lightParticle)].map((item) => (
+    <div class="dust particleA"></div>
+  ))}
+</div>
+
+<style lang="scss">
+@use 'sass:math';
+
+
+// $particulatecolorOne: rgba(67, 189, 230, 1);
+// $particulatecolorMidpoint: rgba(35,222,241,1);
+// $particulatecolorTwo: rgba(2, 255, 252, 1);
+
+
+  .container {
+    bottom: 50px;
+    width: 100%;
+    left: 50%;
+  }
+
+@for $i from 1 through 140 {
+  // Randomly selec postive or negative value
+  $randomBin: math.pow(-1, random(2));
+  $randomOrigin: ($randomBin*random(25));
+  $randomPixelSize: random(2)+px;
+  .particleA:nth-child(#{$i}) {
+    position:absolute;
+    background: white;
+    height: $randomPixelSize;
+    width: $randomPixelSize;
+    bottom: 5px;
+    left: $randomOrigin+px;
+    border-radius: 50%;
+    animation: emmit#{$i} 25s infinite;
+    animation-delay:random(25000)+ms;
+    opacity: 0;
+  }
+  @keyframes emmit#{$i} {
+      0% {
+        opacity: 1;
+        transform: translate3d(0,0,0);
+      }
+      100% {
+        // First value increases horzontal spread of particles <->, second value how high the particles fly.
+        transform: translate3d(($randomBin*random(90))+px,-180px,0);
+        opacity: 0;
+      }
+    }
+}
+
+
+</style>

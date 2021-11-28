@@ -1,0 +1,147 @@
+---
+const {data} = Astro.props
+---
+<div class="content pl-5 pr-5">
+  <div class="columns is-centered mt-1 mb-0 pt-5">
+    <div class="column is-narrow has-text-centered mb-0">
+      <h2 class="title is-4 brand-orange">{data.title}</h2>
+    </div>
+  </div>
+  <div class="columns is-centered mt-0 pt-0">
+    <div class="column has-text-centered is-narrow pt-0 mt-0">
+      <div class="green-line mb-1 mr-2"></div>
+      <span class="brand-white">{data.number}</span>
+      <div class="green-line mb-1 ml-2"></div>
+    </div>
+  </div>
+  <div class="columns is-centered mt-0 pt-0">
+    <div class="column is-1 is-hidden-mobile"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-1
+        pt-0
+        pb-0
+        mt-0
+        mb-0
+      "
+    >
+      <p class="">Tech</p>
+    </div>
+    <div class="column is-hidden-mobile is-1 pt-0 mt-0"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-5
+        pt-0
+        mt-0
+        mr-1
+        ml-1
+      "
+    >
+      {data.stack}
+    </div>
+    <div class="column is-1 is-hidden-mobile"></div>
+  </div>
+  <div class="columns is-centered mt-0 pt-0">
+    <div class="column is-1"></div>
+    <div
+      class="
+        column
+        has-text-left-desktop has-text-centered-mobile
+        is-1
+        pt-0
+        pb-0
+        mt-0
+        mb-0
+      "
+    >
+      <p>Description</p>
+    </div>
+    <div class="column is-hidden-mobile is-1 pt-0 mt-0"></div>
+    <div
+      class="
+        column
+        has-text-justified-mobile has-text-left
+        is-5
+        pt-0
+        mt-0
+        mr-1
+        ml-1
+      "
+    >
+      {data.description}
+    </div>
+    <div class="column is-1 pt-0 mt-0"></div>
+  </div>
+  <div class="columns is-centered mt-0 pt-0">
+    <div class="column is-1 is-hidden-mobile"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-1
+        pt-0
+        pb-0
+        mt-0
+        mb-0
+      "
+    >
+      <p>GitHub</p>
+    </div>
+    <div class="column is-hidden-mobile is-1 pt-0 mt-0"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-5
+        pt-0
+        mt-0
+        mr-1
+        ml-1
+      "
+    >
+      <a href="{data.github}">{data.github}</a>
+    </div>
+    <div class="column is-1 pt-0 mt-0"></div>
+  </div>
+  <div class="columns is-centered mt-0 pt-0">
+    <div class="column is-1 is-hidden-mobile"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-1
+        pt-0
+        pb-0
+        mt-0
+        mb-0
+      "
+    >
+      <p>Demo</p>
+    </div>
+    <div class="column is-hidden-mobile is-1 pt-0 mt-0"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-5
+        pt-0
+        mt-0
+        mr-1
+        ml-1
+      "
+    >
+      <a href="{data.web}">{data.web}</a>
+    </div>
+    <div class="column is-1 pt-0 mt-0"></div>
+  </div>
+</div>
+
+<style lang="scss">
+  .title {
+    color: hsla(0, 0%, 98%);
+  }
+</style>

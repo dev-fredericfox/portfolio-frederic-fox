@@ -1,0 +1,24 @@
+---
+import MainTheme from '../layouts/MainTheme.astro';
+import Footer from '../components/Footer.astro';
+import PlanetAndMoon from '../components/PlanetAndMoon.astro';
+import Cv from '../components/CV/Cv.astro'
+import CvData from '../components/CV/CvData.json'
+---
+
+<MainTheme currentPage="1">
+  <PlanetAndMoon client:load/>
+  <div class="overlay">
+   <Cv data={CvData} />
+  <Footer />
+  </div>
+</MainTheme>
+<!-- Scoped -->
+<style lang="scss">
+  .overlay {
+    position: absolute;
+    display: block;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+</style>

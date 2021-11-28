@@ -1,0 +1,160 @@
+<span id="star__1"></span>
+<span id="star__2"></span>
+<span id="star__3"></span>
+
+<style lang="scss">
+  span {
+    width: 3px;
+    height: 3px;
+    border-radius: 100%;
+    background-color: #439FC2;
+    box-shadow: 0 0 8px #fff;
+    position: absolute;
+    animation-timing-function: cubic-bezier(0, 0.46, 1, 0.96);
+    animation-iteration-count: infinite;
+  }
+
+  #star__1 {
+    // star
+    animation-name: shooting__1;
+    top: 20vh;
+    left: 5vw;
+    animation-duration: 10s;
+  }
+  #star__2 {
+    // star
+    animation-name: shooting__2;
+    top: 10vh;
+    left: 40vw;
+    animation-duration: 12s;
+  }
+
+    #star__3 {
+    // star
+    animation-name: shooting__3;
+    top: 35vh;
+    left: 60vw;
+    animation-duration: 11s;
+  }
+
+  span::before {
+    // star tail
+    position: absolute;
+    display: block;
+    content: '';
+    width: 100px;
+    top: -28px;
+    right: -8px;
+    height: 1px;
+    box-shadow: 0 0 1px rgba(67, 159, 194, 0.4);
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(67, 159, 194, 0.7) 100%
+    );
+    transform: rotate(35deg);
+  }
+  
+
+  @keyframes shooting__1 {
+    0% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    20% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    22% {
+      opacity: 0.8;
+    }
+    25% {
+      opacity: 1;
+    }
+    29% {
+      opactiy: 1;
+    }
+    30% {
+      transform: translate(300px, 200px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(300px, 200px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes shooting__2 {
+    0% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    70% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    72% {
+      opacity: 0.8;
+    }
+    73% {
+      opacity: 1;
+    }
+    75% {
+      opacity: 0.7;
+    }
+    77% {
+      opacity: 1;
+    }
+    79% {
+      opactiy: 1;
+    }
+    80% {
+      transform: translate(300px, 200px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(300px, 200px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes shooting__3 {
+    0% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    50% {
+      transform: translate(0, 0);
+      opacity: 0;
+    }
+    52% {
+      opacity: 0.8;
+    }
+    55% {
+      opacity: 1;
+    }
+    61% {
+      opactiy: 1;
+    }
+    62% {
+      transform: translate(300px, 200px);
+      opacity: 0;
+    }
+    100% {
+      transform: translate(300px, 200px);
+      opacity: 0;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+      #star__1 {
+          left: 1vw
+      }
+      #star__2 {
+          left: 10vw
+      }
+      #star__3 {
+          left: 20vw
+      }
+  }
+</style>

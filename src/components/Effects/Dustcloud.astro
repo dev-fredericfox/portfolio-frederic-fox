@@ -1,0 +1,69 @@
+---
+import Dust from './Dust.astro'
+---
+
+<div class="container">
+  <div class="cloud left">
+    <Dust />
+  </div>
+  <div class="cloud middle">
+    <Dust />
+  </div>
+  <div class="cloud right">
+    <Dust />
+  </div>
+</div>
+
+<style lang="scss">
+  .container {
+    height: 27.3333333333vw;
+    min-width: 100vw;
+    position: absolute;
+    right: 0;
+    bottom: 10vh;
+  }
+
+  .cloud {
+    bottom: 10%;
+    width: 9vw;
+    height: 9vw;
+    position: absolute;
+  }
+
+  .left {
+    left: 18vw;
+    width: 8.5vw;
+    height: 8.5vw;
+  }
+
+  .middle {
+    bottom: 8%;
+    left: 38vw;
+    width: 8vw;
+    height: 8vw;
+    transform: scale(-1);
+  }
+
+  .right {
+    left: 79vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    .middle {
+      display: none;
+    }
+    .left {
+      left: 13vw;
+      bottom: 15%;
+      width: 25vw;
+      height: 25vw;
+    }
+
+    .right {
+      left: 75vw;
+      bottom: 15%;
+      width: 20vw;
+      height: 20vw;
+    }
+  }
+</style>

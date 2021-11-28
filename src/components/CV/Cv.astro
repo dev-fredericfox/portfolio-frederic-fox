@@ -1,0 +1,129 @@
+---
+import Toggle from './Button.vue'
+
+const {data} = Astro.props
+const {work, education, other} = data
+const formatDate = (date) => {
+  const getDate = new Date(date);
+  const options = {year: 'numeric', month: 'short'} ;
+  return getDate != 'Invalid Date' ? getDate.toLocaleDateString('en-GB', options) : date
+}
+---
+<div class="content pl-5 pr-5" id="cv-content">
+  <div class="columns">
+    <div class="column is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd">
+    <div class="columns mb-0">
+      <div class="column is-hidden-touch is-3"></div>
+      <div class="column is-9 is-8-fullhd mb-0 has-text-centered-mobile">
+        <h1 class="title brand-green is-5 mb-0">Work Experience</h1>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-hidden-touch is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd">
+      {work.map(el => (
+      <div class="columns mb-0">
+        <div class="column is-3 has-text-centered-mobile">
+          <p class="mb-0">{formatDate(el.start)} - {formatDate(el.end)}</p>
+          <p class="brand-lavendar location">{el.location}</p>
+        </div>
+        <div class="column is-9 is-7-fullhd mb-1">
+          <p class="job brand-orange mb-0 has-text-centered-mobile"><b>{el.title}</b></p>
+          <p class="company brand-lavendar mb-1 has-text-centered-mobile">{el.company}</p>
+          <p class="brand-lavendar has-text-justified-mobile">{el.description}</p>
+        </div>
+      </div>
+      ))}
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-hidden-touch is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd">
+    <div class="columns mb-0">
+      <div class="column is-hidden-touch is-3"></div>
+      <div class="column is-9 is-8-fullhd mb-0 has-text-centered-mobile">
+        <h1 class="title brand-green is-5 mb-0">Education</h1>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="columns">
+    <div class="column is-hidden-touch is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd has-text-centered-mobile">
+      {education.map(el => (
+      <div class="columns mb-0">
+        <div class="column is-3">
+          <p class="mb-0">{el.start} {el.end}</p>
+          <p class="brand-lavendar location">{el.location}</p>
+        </div>
+        <div class="column is-9 is-8-fullhd">
+          <p class="job brand-orange mb-0"><b>{el.title}</b></p>
+          <p class="company brand-lavendar">{el.uni}</p>
+        </div>
+      </div>
+      ))}
+    </div>
+  </div>
+   <div class="columns">
+    <div class="column is-hidden-touch is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd">
+    <div class="columns mb-0">
+      <div class="column is-hidden-touch is-3"></div>
+      <div class="column is-9 is-8-fullhd mb-0 has-text-centered-mobile">
+        <h1 class="title brand-green is-5 mb-0">Personal</h1>
+      </div>
+      </div>
+    </div>
+  </div>
+
+<div class="columns mb-5">
+    <div class="column is-hidden-touch is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd">
+      <div class="columns mb-0">
+        <div class="column is-3">
+          <p class="mb-0 mt-0 has-text-centered-mobile">{other[0].type}</p>
+          {other[0].description.map(el => (
+            <p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile">{el}</p>
+          ))}
+          
+        </div>
+        <div class="column is-9 is-8-fullhd">
+          <p class="job brand-orange mb-0 mt-0 has-text-centered-mobile"><b>{other[1].type}</b></p>
+          {other[1].description.map(el => (
+            <p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile">{el}</p>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+    <div class="columns mb-5">
+    <div class="column is-hidden-touch is-3-desktop is-6-fullhd"></div>
+    <div class="column is-9-desktop is-6-fullhd">
+      <div class="columns mb-0">
+        <div class="column is-3">
+        </div>
+        <div class="column is-9 is-8-fullhd has-text-centered-mobile">
+    <Toggle client:idle/>
+    </div>
+    </div>
+    </div>
+    </div>
+
+<style lang="scss">
+  .location {
+    font-style: italic;
+  }
+
+  .XLSpacer {
+    margin-bottom: 20vh;
+  }
+
+  .cv-hidden {
+    opacity: 0;
+  }
+</style>

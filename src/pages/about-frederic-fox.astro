@@ -1,0 +1,45 @@
+---
+import MainTheme from '../layouts/MainTheme.astro';
+import Footer from '../components/Footer.astro';
+import About from '../components/About/About.astro';
+import Avatar from '../components/Avatar.astro';
+import Starfall from '../components/Effects/Starfall.astro';
+---
+
+<MainTheme currentPage="3">
+  <Avatar client:load />
+      <Starfall />
+    <About />
+  <div class="footerwrapper">
+    <Footer />
+  </div>
+</MainTheme>
+<!-- Scoped -->
+<style lang="scss">
+  .overlay {
+    position: relative;
+    display: block;
+    width: 100vw;
+    overflow-x: hidden;
+  }
+
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    background: url('../styles/parallax/stars-big-min.png') repeat;
+    background-size: 2000px;
+    background-repeat: repeat-y;
+    -webkit-background-size: 100% auto;
+    position: relative;
+  }
+
+  .footerwrapper {
+    position: absolute;
+    display: block;
+    width: 100vw;
+    bottom: 0;
+  }
+</style>

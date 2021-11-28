@@ -1,0 +1,214 @@
+<canvas id="bg"> </canvas>
+
+<script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three@latest';
+  import { OrbitControls } from 'https://cdn.skypack.dev/three@latest/examples/jsm/controls/OrbitControls';
+  import { EffectComposer } from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/EffectComposer.js';
+  import { RenderPass } from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/RenderPass.js';
+  import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@latest/examples/jsm/postprocessing/UnrealBloomPass.js';
+
+  // Setup > Objects > Lead Textures
+
+  const main = function () {
+    // Setup
+    const canvas = document.querySelector('#bg');
+    const renderer = new THREE.WebGLRenderer({
+      canvas,
+      antialias: true,
+    });
+    renderer.autoClear = false;
+    const scene = new THREE.Scene();
+    const bgScene = new THREE.Scene();
+
+    // Setup > Camera
+    const fov = 20;
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 0.1;
+    const far = 100000;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.left = -canvas.width / 2;
+    camera.right = canvas.width / 2;
+    camera.top = canvas.height / 2;
+    camera.bottom = -canvas.height / 2;
+    camera.position.z = -150;
+    camera.rotation.y = Math.PI;
+    camera.layers.enable(1);
+
+    const textureLoader = new THREE.TextureLoader();
+    const textures = {
+      background: textureLoader.load(
+        '/assets/cv/textures/BackgroundFor3DPlanets1000x1000.png',
+        () => setBgSize()
+      ),
+    };
+
+    const bgTexture = textures.background;
+    bgScene.background = bgTexture;
+    bgTexture.wrapS = THREE.RepeatWrapping;
+    bgTexture.wrapT = THREE.RepeatWrapping;
+    let windowX = window.innerWidth;
+    let windowY = window.innerHeight;
+
+    const setBgSize = () => {
+      if (windowX !== window.innerWidth) {
+        windowX = window.innerWidth;
+      }
+      if (windowY !== window.innerHeight) {
+        windowY = window.innerHeight;
+      }
+      if (bgTexture.image) {
+        bgTexture.repeat.x = windowX / bgTexture.image.width;
+        bgTexture.repeat.y = windowY / bgTexture.image.height;
+      }
+    };
+
+    // Setup > Helpers and auto-rotate
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.autoRotate = true;
+    controls.enabled = false;
+
+    // Setup > Scenes
+    const world = new THREE.Object3D();
+    bgScene.add(world);
+    // Sphere
+    const planet = {
+      radius: 14,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+    const planetGeometry = new THREE.SphereGeometry(
+      planet.radius,
+      planet.widthSegments,
+      planet.heightSegments
+    );
+
+    let textureEquirec = textureLoader.load('/assets/cv/textures/Galaxy_Custom_Texture-1024x512-min.png');
+    textureEquirec.mapping = THREE.EquirectangularReflectionMapping;
+
+    const materialEquilateral = new THREE.MeshBasicMaterial({
+      envMap: textureEquirec,
+    });
+
+    const planetMesh = new THREE.Mesh(planetGeometry, materialEquilateral);
+    world.add(planetMesh);
+
+    // Black Circle
+    const radiusHole = 8.7;
+    const segmentsHole = 48;
+    const geometryHole = new THREE.CircleGeometry(radiusHole, segmentsHole);
+    const materialHole = new THREE.MeshBasicMaterial({ color: 0x000000 });
+    const meshHole = new THREE.Mesh(geometryHole, materialHole);
+    meshHole.position.z = -20;
+    meshHole.rotation.y = Math.PI;
+    world.add(meshHole);
+
+    // Event Horizon
+    const radiusEvent = 9.1;
+    const segmentsEvent = 48;
+    const geometryEvent = new THREE.CircleGeometry(radiusEvent, segmentsEvent);
+    const materialEvent = new THREE.MeshBasicMaterial({ color: 0xb37ed9 });
+    const meshEvent = new THREE.Mesh(geometryEvent, materialEvent);
+    meshEvent.position.z = -17;
+    meshEvent.rotation.y = Math.PI;
+    world.add(meshEvent);
+
+    // Filter
+    let composer;
+
+    const params = {
+      exposure: 0.21,
+      bloomStrength: 1,
+      bloomThreshold: 0.21,
+      bloomRadius: 0.4,
+    };
+
+    const renderScene = new RenderPass(bgScene, camera);
+
+    const bloomPass = new UnrealBloomPass(
+      new THREE.Vector2(window.innerWidth, window.innerHeight),
+      1.5,
+      0.4,
+      0.85
+    );
+    bloomPass.threshold = params.bloomThreshold;
+    bloomPass.strength = params.bloomStrength;
+    bloomPass.radius = params.bloomRadius;
+    bloomPass.renderToScreen = true;
+
+    composer = new EffectComposer(renderer);
+    composer.addPass(renderScene);
+    composer.addPass(bloomPass);
+
+    // Setup Responsive Display
+    function resizeRendererToDisplaySize(renderer) {
+      const canvas = renderer.domElement;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const needResize = canvas.width !== width || canvas.height !== height;
+      if (needResize) {
+        renderer.setSize(width, height, false);
+        composer.setSize(width, height);
+      }
+      return needResize;
+    }
+
+    const resizeCanvas = () => {
+      if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+      }
+    };
+
+    // Recusrive function
+    function render(time) {
+      time *= 0.001;
+      resizeCanvas();
+      // 0.0036, 0.0035 turns left
+      // 0.0034 turns right
+      world.rotation.y -= 0.00349;
+      if (world.scale.y < 1.4) {
+        world.scale.y += 0.001;
+        world.scale.x += 0.001;
+        world.scale.z += 0.001;
+      } else if (world.scale.y > 1.4 && world.scale.y < 3.5) {
+        world.scale.y += 0.001;
+        world.scale.x += 0.001;
+        world.scale.z += 0.001;
+        meshEvent.scale.y += 0.00005;
+        meshEvent.scale.x += 0.00005;
+      } else {
+        world.scale.y = 1;
+        world.scale.x = 1;
+        world.scale.z = 1;
+        meshEvent.scale.y = 1;
+        meshEvent.scale.x = 1;
+      }
+
+      // Helper for Developement (mouse move around scene) - in this case it can also auto rotate camera. User controls are disabled above.
+      controls.update();
+
+      requestAnimationFrame(render);
+      renderer.clear();
+      composer.render();
+      renderer.clearDepth();
+      renderer.render(scene, camera);
+    }
+
+    requestAnimationFrame(render);
+  };
+
+  main();
+</script>
+
+<style>
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  html {
+    background: rgb(25, 0, 42);
+  }
+</style>

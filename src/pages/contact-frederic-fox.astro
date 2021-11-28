@@ -1,0 +1,67 @@
+---
+import MainTheme from '../layouts/MainTheme.astro';
+import Footer from '../components/Footer.astro';
+import Contact from '../components/Contact/Contact.vue';
+import Starfall from '../components/Effects/Starfall.astro';
+---
+
+<MainTheme currentPage="2">
+  <Starfall />
+  <div class="content pl-2 pr-2">
+    <Contact client:visible />
+  </div>
+  <div class="footerwrapper">
+    <Footer />
+  </div>
+</MainTheme>
+
+<!-- Scoped -->
+<style>
+  html,
+  body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    background: url('../styles/background/stars-big-min.png'),
+      url('../styles/background/planet_round-min.svg'),
+      radial-gradient(
+        120% 120% at bottom,
+        rgba(54, 208, 196, 1) 0%,
+        rgba(39, 46, 175, 1) 25%,
+        rgba(25, 0, 42, 1) 60%,
+        rgba(25, 0, 42, 1) 100%
+      );
+    background-size: 2000px, 80%, 100%;
+    background-position: top, bottom;
+    background-repeat: repeat-x, no-repeat, no-repeat;
+    position: relative;
+    /* padding-bottom: 20vh; */
+  }
+
+  .footerwrapper {
+    position: absolute;
+    display: block;
+    width: 100vw;
+    bottom: 0;
+  }
+
+  @media screen and (max-width: 768px) {
+    body {
+    background: url('../styles/background/stars-big-min.png'),
+        url('../styles/background/planet_round-min.svg'),
+        radial-gradient(
+          120% 55% at bottom,
+          rgba(54, 208, 196, 1) 0%,
+          rgba(39, 46, 175, 1) 35%,
+          rgba(25, 0, 42, 1) 80%,
+          rgba(25, 0, 42, 1) 100%
+        );
+      background-size: 2000px, 120%, 120%;
+      background-position: top, bottom;
+      background-repeat: repeat-x, no-repeat, no-repeat;
+      position: relative;
+    }
+  }
+</style>

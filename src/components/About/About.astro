@@ -1,0 +1,133 @@
+---
+import LightParticles from './LightParticles.astro'
+---
+
+<div class="content pl-5 pr-5">
+  <div class="columns">
+        <div class="column is-2"></div>
+      <div class="column is-8 has-text-centered mb-5">
+        <h1 class="title is-5">Hi, I am Fred!</h1>
+      </div>
+  </div>
+  <div class="columns mt-5">
+    <div class="column is-1-desktop"></div>
+    <div class="column is-3-desktop is-2-fullhd mt-0 pt-5" id="canvas-div">
+      <canvas id="bg"> </canvas>
+      <LightParticles />
+      <p class="is-size-7 brand-lavendar">
+        Face model & texture courtesy of Wolf3d. Creative Commons Attribution-
+        NonCommercial- ShareAlike 4.0
+      </p>
+    </div>
+    <div class="column is-8-desktop is-7-fullhd">
+      <h3 class="title is-5 brand-orange has-text-centered mt-5">
+        Computers - A Lifelong Passion
+      </h3>
+      <div class="hud">
+        <div class="hud-content">
+          <p>
+            Be it deleting System32, swapping my CPU, listening to dial-up or
+            trying to fathom networking in order to play C&C with friends,
+            computers have been part of my life as far back as I can remember.
+            <br />During my teenage years, I discovered my first HTML book and
+            started building my own computer, and I was always the go-to person
+            when it came to IT advice and unravelling puzzles with hardware and
+            software. <br />Next came a handful of work placements in IT-related
+            fields, my favourite being with a B2B hardware supplier where I
+            helped to build and test blade servers for Siemens.
+          </p>
+          <p>
+            And yet.. for many reasons, my studies and career somehow led me
+            elsewhere.
+          </p>
+        </div>
+      </div>
+      <h3 class="title is-5 brand-orange has-text-centered">My Career</h3>
+      <div class="hud">
+        <div class="hud-content">
+          <p>
+            After finishing my degree in online marketing, I discovered that my
+            passion for computers had all but faded; on the contrary, every time
+            I encountered an IT problem at work, I always found myself
+            wondering: 'How can I automate this?'
+            <br />Slowly but surely, I picked up programming again whenever the
+            chance arose. Google Sheets has an excellent scripts option allowing
+            you to enhance spreadsheets with JavaScript. That proved my gateway
+            'drug'. <br />Later, when I co-founded an advertising agency, I
+            became responsible for everything IT-related. From a cranky
+            click-tracking software using SQL databases deployed on our own VPS
+            to helping clients integrate tracking scripts and connect to Google
+            APIs, I was always the one delving into the IT world and spending
+            countless hours resolving elusive problems. <br />It was several
+            years later, though, when I co-founded an online retailer, that I
+            came to spend the majority of my time programming. From customising
+            our Shopify theme (Liquid) and connecting with APIs to building a
+            Node.js back-end and programming a Pick-And-Pack system, I could not
+            help but always strive to take our system further. Automating
+            product management... integrating barcode scanners... optimising
+            translation... every one was a project, and they all came to
+            fruition.
+          </p>
+        </div>
+      </div>
+      <h3 class="title is-5 brand-orange has-text-centered">
+        Where I am going...
+      </h3>
+      <div class="hud">
+        <div class="hud-content">
+          <p>
+            Early in 2021, my co-founder and I decided to part ways, and we are
+            currently liquidating our companies. In the meantime, I am using my
+            time (and the lockdown) to dive deeper into topics such as
+            JavaScript, CSS, Vue.js, Node.js and machine learning. Only now do I
+            realise that problem solving was the main thing I liked about
+            entrepreneurship. In other words, the essence of coding. <br>Next 
+            step? See where this new adventure takes me.
+          </p>
+          <p>Until we speak,<br />Fred</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="columns">
+  <div class="column XLSpacer"></div>
+</div>
+
+<style lang="scss">
+  .XLSpacer {
+    margin-bottom: 15vh;
+  }
+
+  #bg {
+    left: 0;
+    width: 100%;
+    min-height: 300px;
+    background: url('../../styles/background/hologram-min.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: -0.4vw;
+  }
+
+  .hud {
+    display: grid;
+    background: radial-gradient(
+      ellipse at center,
+      hsla(276, 100%, 8%, 0) 0%,
+      hsla(276, 100%, 8%, 0) 72%,
+      hsla(171, 70%, 51%, 1) 100%
+    );
+  }
+
+  .hud-content {
+    grid-area: 1 / 1;
+    margin: 1px;
+    padding: 1em;
+    background-color: hsla(276, 100%, 8%, 1);
+  }
+
+  html {
+    background: hsla(276, 100%, 8.2%, 1)
+  }
+</style>

@@ -1,0 +1,69 @@
+{"work": [{
+		"start": "2021-03-01",
+		"end": "Today",
+		"title": "Marketing Consultant",
+		"company":"Gremco GmbH",
+		"location": "Augsburg (Remote)",
+		"description": "After a successful generational transition I am helping my client set up a competitive B2B digital marketing and sales strategy as well as train employees in the day-to-day digital marketing operations and optimisation processes of high impact online marketing campaigns."
+	},
+	{
+		"start": "2018-11-01",
+		"end": "2021-02-27",
+		"title": "Co-Founder / General Manager",
+		"company":"BF International Foods GmbH",
+		"location": "Berlin / Freiburg i.B.",
+		"description": "Operating under the brand name Krakenkind, our company imported and distributed sweets and snacks from around the world. </br>Our online store had a 4.9/5-stars customer satisfaction score and under 1% returns. <br>Key Achievements:<br><ul class=\"brand-lavendar\"><li>Scaled company revenue in a year from 40,000€ to 263,000€ with a low initial capital of 25,000€.</li><li>Increased warehousing capacities from 40m2 with one employee to 100m2 with five employees.</li><li>Hired, trained and motivated employees, achieving a 100% retention rate owing to a cooperative team structure based on trust and clear task ownsership resulting in high performance teams.</li><li>Increased packing speed by 25% and improved packing accuracy by 40% by implementing in-house digital warehouse solutions.</li><li>Increased website check-out conversion rate by 52% (from 1.5% to 2.3%) and lowered the bounce rate by 23% (from 67% to 52%).</li></ul>"
+	},
+	{
+		"start": "2015-01-01",
+		"end": "2019-05-31",
+		"title": "Co-Founder / General Manager",
+		"company":"Traffic Hunter GmbH",
+		"location": "Berlin",
+		"description": "We helped companies to plan and execute 360° digital advertising strategies as well as to train their employees. We helped dozens of clients in different B2C categories to define goals, set up professional analytics & ad campaigns and tailor strategies in order to optimize marketing budgets and increase sales, sign-ups and brand recognition. We were behind the scenes affiliate partner for several big agencies."
+	},
+	{
+		"start": "2012-10-01",
+		"end": "2014-12-31",
+		"title": "Online Marketing Manager",
+		"company":"GameGenetics GmbH",
+		"location": "Berlin",
+		"description": "Launch and ROAS optimisation of performance marketing campaigns."
+	}],
+"education": [
+	{
+		"start": "2021",
+		"end": "",
+		"title": "Machine Learning",
+		"uni": "Coursera with Standford Online",
+		"location": "Remote"
+	},
+	{
+		"start": "2020",
+		"end": "",
+		"title": "Web Developper Bootcamp",
+		"uni": "Udemy",
+		"location": "Remote"
+	},
+	{
+		"start": "2020",
+		"end": "",
+		"title": "Modern Javascript Bootcamp",
+		"uni": "Udemy",
+		"location": "Remote"
+	},
+	{
+		"start": "2009",
+		"end": "- 2011",
+		"title": "Bachelor: Online Marketing and Communication",
+		"uni": "Université Aix Marseille",
+		"location": "Aix-en-Provence, France"
+	}],
+	"other":  [{
+		"type": "Languages",
+		"description": ["Native in French","Native in German","Fluent in English"]
+	},{
+		"type": "Personal Interests",
+		"description": ["Reading (Science-Fiction, Fantasy)", "Hiking, Cooking", "Renewable Energy & Electrification", "Computer Hardware & Software", "Ethereum"]
+	}]
+}

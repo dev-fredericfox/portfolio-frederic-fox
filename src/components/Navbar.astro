@@ -1,0 +1,44 @@
+---
+const {nav} = Astro.props
+const menuItems = [{name:'Portfolio', route:'/'},{name:'Curriculum Vitae', route:'/cv-frederic-fox'} , {name:'Contact', route:'/contact-frederic-fox'}, {name:'About me', route:'/about-frederic-fox'}]
+---
+<div class="navbar-menu p-5">
+  <div class="navbar-start pl-5">
+    <div class="navbar-item is-flex-direction-column has-text-centered is-align-items-start pl-5">
+      <div class="brand-white has-text-centered	"><a href="/">Frederic Fox</a></div>
+      <div class="brand-lavendar has-text-centered	">// Full Stack Developer</div>
+    </div>
+  </div>
+
+  <div class="navbar-end pr-5">
+  {menuItems.map((el,idx) => (
+    idx === parseInt(nav) ? <a href={el.route} class="navbar-item p-1 mr-5 has-underline">{el.name}</a> : <a href={el.route} class="navbar-item p-1 mr-5">{el.name}</a>
+  ))}
+  </div>
+</div>
+<!-- Navbar Mobile-->
+<div class="navbar-menu has-background-transparent is-active is-hidden-desktop">
+  <div class="navbar-item has-text-centered">
+    <div class="brand-white">Frederic Fox<span class="brand-lavendar ml-4">// Full Stack Developer</span></div>
+  </div>
+  <div class="is-flex navbar-item is-flex-direction-row	is-justify-content-space-evenly">
+  {menuItems.map((el,idx) => (
+    idx === parseInt(nav) ?   <a href={el.route} class="has-text-centered p-1 has-underline">{el.name}</a> : <a href={el.route} class="has-text-centered p-1">{el.name}</a>
+  ))}
+  </div>
+</div>
+
+
+<style>
+.navbar-item {
+  z-index: 1;
+}
+
+.has-underline {
+      border-bottom: 0.05rem solid hsla(171, 70%, 51%, 100);
+  }
+
+a {
+  height: fit-content;
+}
+</style>

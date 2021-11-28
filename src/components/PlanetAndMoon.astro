@@ -1,0 +1,426 @@
+<canvas id="bg"> </canvas>
+
+<script type="module">
+  import * as THREE from 'https://cdn.skypack.dev/three@latest';
+  import { OrbitControls } from 'https://cdn.skypack.dev/three@latest/examples/jsm/controls/OrbitControls';
+  import {
+    Lensflare,
+    LensflareElement,
+  } from 'https://cdn.skypack.dev/three@latest/examples/jsm/objects/Lensflare.js';
+  import * as BufferGeometryUtils from 'https://cdn.skypack.dev/three@latest/examples/jsm/utils/BufferGeometryUtils.js';
+  import { OBJLoader } from 'https://cdn.skypack.dev/three@latest/examples/jsm/loaders/OBJLoader.js';
+  import { MTLLoader } from 'https://cdn.skypack.dev/three@latest/examples/jsm/loaders/MTLLoader.js';
+
+
+
+  const main = function () {
+    // Setup
+    const canvas = document.querySelector('#bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
+    const scene = new THREE.Scene();
+    // scene.background = new THREE.Color('grey');
+    // scene.fogColor = new THREE.Color().setHSL(0.51, 0.4, 0.01);
+    // // scene.background = textures.background;
+    // scene.fog = new THREE.Fog(scene.fogColor, 3500, 15000);
+
+      // Setup > Objects > Lead Textures
+  const textureLoader = new THREE.TextureLoader();
+  const textures = {
+    background: textureLoader.load('/assets/cv/textures/BackgroundFor3DPlanets1000x1000.png', () => setBgSize()),
+    planet: textureLoader.load('/assets/cv/textures/PlanetTexture_small-min.png'),
+    moon: textureLoader.load('/assets/cv/textures/MoonTexture_small-min.png'),
+    giant: textureLoader.load('/assets/cv/textures/gasgiant_small-min.jpg'),
+    ice: textureLoader.load('/assets/cv/textures/iceTexture_small-min.jpeg'),
+    textureFlare0: textureLoader.load('/assets/cv/lensflare/lensflare0.png'),
+    textureFlare1: textureLoader.load('/assets/cv/lensflare/lensflare1.png'),
+    textureFlare2: textureLoader.load('/assets/cv/lensflare/lensflare2.png'),
+    textureFlare2b: textureLoader.load('/assets/cv/lensflare/lensflare2b.png'),
+    textureFlare3: textureLoader.load('/assets/cv/lensflare/lensflare3.png'),
+  };
+  const objLoader = new OBJLoader();
+  const mtlLoader = new MTLLoader();
+
+    const bgTexture = textures.background;
+    scene.background = bgTexture;
+    bgTexture.wrapS = THREE.RepeatWrapping;
+    bgTexture.wrapT = THREE.RepeatWrapping;
+    let windowX = window.innerWidth;
+    let windowY = window.innerHeight;
+
+  const setBgSize = () => {
+    if (windowX !== window.innerWidth) {
+      windowX = window.innerWidth;
+    }
+    if (windowY !== window.innerHeight) {
+      windowY = window.innerHeight;
+    }
+    if (bgTexture.image) {
+    bgTexture.repeat.x = windowX / bgTexture.image.width
+    bgTexture.repeat.y = windowY / bgTexture.image.height
+    }
+  }
+    
+
+    // Setup > Camera
+    const fov = 40;
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 0.1;
+    const far = 2000;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.left = -canvas.width / 2;
+    camera.right = canvas.width / 2;
+    camera.top = canvas.height / 2;
+    camera.bottom = -canvas.height / 2;
+    camera.position.set(0, 80, 2)
+    camera.up.set(0, 0.01, 1);
+    // Setup > Light > Directional Light
+    const directionalLightColor = 0xffffff;
+    let directionalLightIntensity = 0.9;
+    const directionalLight = new THREE.DirectionalLight(
+      directionalLightColor,
+      directionalLightIntensity
+    );
+    directionalLight.position.x = -340;
+    directionalLight.position.y = -800;
+    directionalLight.position.z = 20;
+    // Setup > Light > Shadows
+    renderer.shadowMap.enabled = true;
+    directionalLight.castShadow = false;
+    directionalLight.target.position.set(200, 50, 200);
+    scene.add(directionalLight);
+
+    scene.add(directionalLight.target);
+    // Setup > Light > Ambient Light
+    const ambientLightcolor = 0xffffff;
+    const ambientLightintensity = 0.3;
+    const ambientLight = new THREE.AmbientLight(
+      ambientLightcolor,
+      ambientLightintensity
+    );
+    scene.add(ambientLight);
+
+    // Setup > Light > Point Light (Fake Sun)
+    const pointLightColor = 0xffffff;
+    const pointLightIntensity = 3.5;
+    const pointLightDistance = 2000;
+    const pointLight = new THREE.PointLight(
+      pointLightColor,
+      pointLightIntensity,
+      pointLightDistance
+    );
+    pointLight.position.x = -140;
+    pointLight.position.y = -900;
+    pointLight.position.z = 20;
+    pointLight.castShadow = true;
+    scene.add(pointLight);
+
+    // Setup > Light > Point Light > Lensflare
+    const lensflare = new Lensflare();
+    lensflare.addElement(new LensflareElement(textures.textureFlare0, 100, 0));
+    lensflare.addElement(new LensflareElement(textures.textureFlare2, 800, 0));
+    lensflare.addElement(new LensflareElement(textures.textureFlare2b, 400, 0));
+    lensflare.addElement(new LensflareElement(textures.textureFlare3, 70, 0.7));
+    lensflare.addElement(new LensflareElement(textures.textureFlare3, 60, 0.6));
+    lensflare.addElement(
+      new LensflareElement(textures.textureFlare3, 120, 0.9)
+    );
+    lensflare.addElement(new LensflareElement(textures.textureFlare3, 70, 1));
+    pointLight.add(lensflare);
+
+    // Setup > Helpers
+    const controls = new OrbitControls(camera, renderer.domElement);
+    // const helper = {
+    //   light: new THREE.DirectionalLightHelper(directionalLight),
+    //   point: new THREE.PointLightHelper(pointLight),
+    //   grid: new THREE.GridHelper(200, 50),
+    //   camera: new THREE.CameraHelper(directionalLight.shadow.camera),
+    // };
+    // scene.add(helper.light, helper.point, helper.grid);
+    // scene.add(helper.camera);
+
+    // Setup > Objects
+    const objects = [];
+    const manyObjects = [];
+    const staticObjects = [];
+    const geometries = [];
+    const asteroidsObjects = []
+    // Setup > Scenes
+    // Setup > Scene > SolarSystem (sun)
+    const world = new THREE.Object3D();
+    scene.add(world)
+    const solarSystem = new THREE.Object3D();
+    world.add(solarSystem);
+    solarSystem.rotation.y = 0.14;
+    solarSystem.position.x = 14;
+    staticObjects.push(solarSystem);
+    // Setup > Scene > Planet System (planet, moon)
+    const planetSystem = new THREE.Object3D();
+    world.add(planetSystem);
+    planetSystem.rotation.y = 0.14;
+    planetSystem.position.x = 14;
+    objects.push(planetSystem);
+    // Setup > Scene > Rings
+    const ringSystem = new THREE.Object3D();
+    planetSystem.add(ringSystem);
+    manyObjects.push(ringSystem);
+    // Setup > Scene > Asteroids
+    const asteroidSystem = new THREE.Object3D();
+    world.add(asteroidSystem)
+    asteroidSystem.position.y = 200;
+    asteroidSystem.position.x = -5;
+    asteroidSystem.position.z = 5;
+    // Setup > Scene > Giant
+    const giantSystem = new THREE.Object3D();
+    giantSystem.position.x = 60;
+    giantSystem.position.y = 330;
+    giantSystem.position.z = 0;
+    world.add(giantSystem);
+
+        // Setup > Scene > Imported Objects (blender)
+     mtlLoader.load('/assets/cv/models/AsteroidOne.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+  objLoader.load('/assets/cv/models/Asteroid_01.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+     objLoader.load('/assets/cv/models/Asteroid_02.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+        objLoader.load('/assets/cv/models/Asteroid_03.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+        objLoader.load('/assets/cv/models/Asteroid_04.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+        objLoader.load('/assets/cv/models/Asteroid_05.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+  });
+  
+
+    // Setup > Objects > *Planet*
+    const planet = {
+      radius: 5,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+    const planetGeometry = new THREE.SphereGeometry(
+      planet.radius,
+      planet.widthSegments,
+      planet.heightSegments
+    );
+    const planetMaterial = new THREE.MeshLambertMaterial({
+      map: textures.planet,
+      emissiveIntensity: 0,
+    });
+    const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
+    planetMesh.castShadow = true;
+    planetMesh.receiveShadow = true;
+    planetMesh.scale.set(1, 1, 1);
+    planetMesh.rotation.x = 5;
+    planetSystem.add(planetMesh);
+    objects.push(planetMesh);
+
+    // Setup > Objects > Moon
+    const moon = {
+      radius: 1,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+    const moonGeometry = new THREE.SphereGeometry(
+      moon.radius,
+      moon.widthSegments,
+      moon.heightSegments
+    );
+    const moonMaterial = new THREE.MeshLambertMaterial({
+      map: textures.moon,
+      color: 0xffff00,
+    });
+    const moonCoreMaterial = new THREE.MeshPhongMaterial({
+      color: 0x000000,
+    });
+    const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
+    const moonCoreMesh = new THREE.Mesh(moonGeometry, moonCoreMaterial);
+    moonCoreMesh.scale.set(0.9, 0.9, 0.9);
+    moonMesh.position.x = -40;
+    moonCoreMesh.position.x = -40;
+    moonMesh.receiveShadow = true;
+    solarSystem.add(moonMesh);
+    solarSystem.add(moonCoreMesh);
+    objects.push(moonMesh);
+    objects.push(moonCoreMesh);
+
+    // Setup > Objects > Gas Giant
+    const giant = {
+      radius: 30,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+
+    const giantGeometry = new THREE.SphereGeometry(
+      giant.radius,
+      giant.widthSegments,
+      giant.heightSegments
+    );
+
+    const giantMaterial = new THREE.MeshLambertMaterial({
+      map: textures.giant,
+      emissiveIntensity: 0,
+    });
+    const giantMesh = new THREE.Mesh(giantGeometry, giantMaterial);
+    giantMesh.castShadow = true;
+    giantMesh.receiveShadow = false;
+    giantMesh.scale.set(1, 1, 1);
+    giantMesh.rotation.x = 14;
+    giantSystem.add(giantMesh);
+    objects.push(giantMesh);
+
+    // Setup > Objects > *Asteroid* > Material & Mesh
+    const asteroidMaterial = new THREE.MeshPhongMaterial({
+      color: 0xd6f9ff,
+      shininess: 200,
+    });
+
+    /////// Ad ring bis
+    // We can rotate the lon helper on its Y axis to the longitude
+    const lonHelper = new THREE.Object3D();
+    scene.add(lonHelper);
+    // We rotate the latHelper on its X axis to the latitude
+    // The position helper moves the object to the edge of the sphere
+    const positionHelper = new THREE.Object3D();
+    positionHelper.position.z = 0;
+
+    lonHelper.add(positionHelper);
+    // Used to move the center of the box so it scales from the position Z axis
+    const originHelper = new THREE.Object3D();
+    originHelper.position.z = 10.5;
+    originHelper.position.x = 10;
+    originHelper.position.y = 0;
+    positionHelper.add(originHelper);
+    const randomAngle = () => Math.round(Math.random() * 360);
+    const randomScale = () => (Math.round(Math.random() + 5) * 20) / 2000;
+    const randomPosition = () => 7.2 + Math.round(Math.random() * 8) / 10;
+
+    const addRing = function () {
+      for (let i = 0; i < 1200; i++) {
+        const asteroid = {
+          radius: Math.round(Math.random() * 9) / 10,
+          detail: 0,
+        };
+        const asteroidGeometries = {
+          DodecahedronGeometry: new THREE.DodecahedronGeometry(
+            asteroid.radius,
+            asteroid.detail
+          ),
+          IcosahedronGeometry: new THREE.IcosahedronGeometry(
+            asteroid.radius,
+            asteroid.detail
+          ),
+        };
+        const geometry =
+          i % 2 == 0
+            ? asteroidGeometries.DodecahedronGeometry
+            : asteroidGeometries.IcosahedronGeometry;
+        lonHelper.rotation.y = randomAngle();
+        positionHelper.position.x = randomPosition();
+        lonHelper.rotation.x = 1.5;
+        positionHelper.scale.set(randomScale(), randomScale(), randomScale());
+        originHelper.updateWorldMatrix(true, false);
+        geometry.applyMatrix4(originHelper.matrixWorld);
+
+        geometries.push(geometry);
+      }
+    };
+    addRing();
+    const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(
+      geometries,
+      false
+    );
+    const asteroidMesh = new THREE.Mesh(mergedGeometry, asteroidMaterial);
+    asteroidMesh.receiveShadow = true;
+    planetSystem.add(asteroidMesh);
+
+    // Setup Responsive Display
+    function resizeRendererToDisplaySize(renderer) {
+      const canvas = renderer.domElement;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const needResize = canvas.width !== width || canvas.height !== height;
+      if (needResize) {
+        renderer.setSize(width, height, false);
+      }
+      return needResize;
+    }
+
+    // Move Camera with Scoll
+    const moveCamera = function () {
+      const userPosition = document.body.getBoundingClientRect().top <= 0 ? document.body.getBoundingClientRect().top : 0 ;
+      if (window.innerWidth < 600) {
+        world.position.y = (userPosition+120)*0.5 ;
+        world.position.z = (userPosition+20)*0.01;
+        world.position.x = (userPosition+360)*-0.02;
+      } else {
+        world.position.y = (userPosition+130)*0.5 ;
+        world.position.z = userPosition*0.01;
+        world.position.x = (userPosition)*-0.05;
+      }
+    };
+
+    document.body.onscroll = moveCamera;
+    moveCamera();
+const resizeCanvas = () => {
+          if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        setBgSize()
+      }
+}
+
+    // Recusrive function
+    function render(time) {
+      time *= 0.001;
+
+      resizeCanvas()
+        asteroidsObjects.forEach((obj) => {
+          obj.rotation.z = time * 0.08;
+          obj.rotation.x = time * 0.02;
+          obj.rotation.y = time * 0.05;
+        });
+
+      solarSystem.rotation.z = time * 0.2;
+      planetSystem.rotation.z = time * 0.02;
+      giantSystem.rotation.z = time * 0.05;
+      asteroidSystem.rotation.z = time * 0.05;
+      asteroidSystem.rotation.x = time * 0.2;
+      asteroidSystem.rotation.y = time * 0.02;
+      // mesh.rotation.z = time*0.5;
+      renderer.render(scene, camera);
+
+      // Helper for Developement (mouse move around scene)
+      controls.update();
+
+      requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
+  };
+
+  main();
+</script>
+
+<style>
+  canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  html {
+    background: rgb(25, 0, 42);
+  }
+</style>

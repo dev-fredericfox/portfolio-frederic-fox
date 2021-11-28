@@ -1,0 +1,156 @@
+---
+import Bubble from '../components/Effects/Bubble.astro'
+import Smoke from '../components/Effects/Smoke.astro'
+import Dust from '../components/Effects/Dustcloud.astro'
+---
+<div class="parallax">
+<div id="zindex-8">
+<slot name="zindex"></slot>
+</div>
+  <div class="parallax__layer parallax__layer__1">
+    <img src="../assets/parallax/01.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__2">
+    <img src="../assets/parallax/02.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__3">
+    <img src="../assets/parallax/03.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__4">
+    <img src="../assets/parallax/04.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__5">
+    <img src="../assets/parallax/05.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__6">
+    <img src="../assets/parallax/06.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__7">
+    <img src="../assets/parallax/07.svg" />
+    <Bubble/>
+  </div>
+  <div class="parallax__layer parallax__layer__8">
+  <Dust/>
+    <img src="../assets/parallax/08.svg" />
+  </div>
+  <div class="parallax__layer parallax__layer__9" id="lava">
+  <Smoke/>
+    <img src="../assets/parallax/09.svg" />
+  </div>
+  <div class="parallax__cover">
+    <slot />
+  </div>
+</div>
+
+<!-- Scoped -->
+<style lang="scss">
+#zindex-8 {
+  position: sticky;
+  z-index: 8;
+  top: 0px;
+}
+
+  .parallax {
+    perspective: 100px;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-left: 0;
+  }
+
+  .parallax__layer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index:1;
+    pointer-events: none;
+    backface-visibility: hidden;
+    // perspective: 1000;
+  }
+
+  .parallax__layer__1 {
+    transform: translateZ(-400px) scale(5.0);
+  }
+
+  .parallax__layer__2 {
+    transform: translateZ(-350px) scale(4.5);
+  }
+
+  .parallax__layer__3 {
+    transform: translateZ(-300px) scale(4);
+  }
+
+  .parallax__layer__4 {
+    transform: translateZ(-250px) scale(3.5);
+  }
+
+  .parallax__layer__5 {
+    transform: translateZ(-200px) scale(3);
+  }
+
+  .parallax__layer__6 {
+    transform: translateZ(-150px) scale(2.5);
+  }
+
+  .parallax__layer__7 {
+    transform: translateZ(-100px) scale(2);
+  }
+
+  .parallax__layer__8 {
+    transform: translateZ(-25px) scale(1.25);
+  }
+
+  .parallax__layer__9 {
+    transform: translateZ(0px) scale(1);
+    z-index:10;
+  }
+
+// Reduce clutter of statc Dustcloud
+  .parallax__layer__8 img {
+    opacity: 0.3
+  }
+
+  .parallax__layer img {
+    display: block;
+    position: absolute;
+    bottom: 10vh;
+  }
+
+  .parallax__cover {
+    background: rgba(14, 23, 71, 1);
+    display: block;
+    position: absolute;
+    top: 89.5vh;
+    left: 0;
+    right: 0;
+    height: auto;
+    z-index: 10;
+  }
+
+    body {
+      background: rgb(25, 0, 42);
+      background: url('../styles/parallax/stars-big-min.png'),
+        linear-gradient(
+          0deg,
+          rgba(54, 208, 196, 1) 0%,
+          rgba(39, 46, 175, 1) 50%,
+          rgba(25, 0, 42, 1) 80%
+        );
+      background-size: 2000px;
+      background-repeat: repeat-x;
+    }
+
+  @media screen and (max-width: 768px) {
+    img {
+      min-width: 320%;
+      left: -200px;
+    }
+  }
+</style>

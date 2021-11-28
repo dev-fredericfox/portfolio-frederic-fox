@@ -1,0 +1,51 @@
+---
+import MainThemeNoNav from '../layouts/MainThemeNoNav.astro';
+import Navbar from '../components/Navbar.astro'
+import Projects from '../components/Portfolio/Projects.astro'
+import Headline from '../components/Portfolio/Headline.astro'
+import ParallaxMars from '../components/ParallaxScifi.astro'
+import Starfall from '../components/Effects/Starfall.astro'
+import ProjectData from '../components/Portfolio/ProjectData.json'
+import Footer from '../components/Footer.astro'
+---
+
+<MainThemeNoNav currentPage="0">
+  <ParallaxMars>
+    <div class="slot-wrapper" slot="zindex">
+      <Navbar nav="0" />
+      <div class="columns responsive-spacer is-fullhd"></div>
+      <Headline/>
+      <Starfall />
+    </div>
+    <Projects data={ProjectData[0]} />
+    <Projects data={ProjectData[1]} />
+    <Projects data={ProjectData[2]} />
+    <Projects data={ProjectData[3]} />
+    <Projects data={ProjectData[4]} />
+    <div class="footerwrapper">
+    <Footer />
+    </div>
+  </ParallaxMars>
+</MainThemeNoNav>
+<!-- Scoped -->
+<style lang="scss">
+  html {
+    position: fixed;
+    width: 100vw;
+  }
+
+  .footerwrapper {
+    margin-top: 100px;
+  }
+
+  @media screen and (max-width: 900px) {
+      .footerwrapper {
+    margin-bottom: 81px;
+  }
+}
+  @media screen and (min-width: 900px) and (max-width: 1600px) {
+      .footerwrapper {
+    margin-bottom: 60px;
+  }
+  }
+</style>
