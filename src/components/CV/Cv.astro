@@ -6,7 +6,7 @@ const {work, education, other} = data
 const formatDate = (date) => {
   const getDate = new Date(date);
   const options = {year: 'numeric', month: 'short'} ;
-  return getDate != 'Invalid Date' ? getDate.toLocaleDateString('en-GB', options) : date
+  return getDate != 'Invalid Date' ? getDate.toLocaleDateString('en-GB', options) : date 
 }
 ---
 <div class="content pl-5 pr-5" id="cv-content">
