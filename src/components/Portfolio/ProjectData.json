@@ -11,8 +11,8 @@
 	"number": "IV",
 	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | JS Workers</p>",
 	"description": "<p>Train machine learning data in your browser</p>",
-	"github": "https://github.com/dev-fredericfox/stk.market",
-	"web": "https://stk.market/AAPL"
+	"github": "https://github.com/dev-fredericfox/tbd",
+	"web": "https://tbd.com"
 },
 {
 	"title": "curl stockmarket quotes",
@@ -34,7 +34,7 @@
 	"title": "Node.js Form Handler",
 	"number": "I",
 	"stack": "<p><b>Node</b></p><p> Node.js | Formhandler | Firebase</p>",
-	"description": "<p>Backend to handle form submits. Repo has been set to private for the moment. You can check out how it works by submiting the contact form on this website. Link below.</p>",
+	"description": "<p>Node.js backend to handle form submits. Repo has been set to private for the moment. You can check out how it works by submiting the contact form on this website. Link below.</p>",
 	"github": "https://github.com/dev-fredericfox/PrivateFormEmailHandler/",
 	"web": "/contact-frederic-fox"
 }]
