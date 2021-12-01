@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@astrojs/renderer-vue": "^0.1.9",
-    "bulma": "^0.9.3",
-    "three": "^0.134.0"
+    "bulma": "^0.9.3"
   }
 }
