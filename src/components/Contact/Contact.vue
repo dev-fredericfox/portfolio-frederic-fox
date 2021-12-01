@@ -5,7 +5,7 @@
       <div class="column is-8 has-text-centered">
         <h1 class="title is-5">Get in touch</h1>
         <p><b>Have a project in mind? Send me your ideas, and I’ll get back to you shortly!</b></p>
-        <p>Or find me on <a href="https://www.linkedin.com/in/foxfrederic/">LinkedIn</a>.</p>
+        <p>(Or find me on <a href="https://www.linkedin.com/in/foxfrederic/">LinkedIn</a>).</p>
       </div>
     </div>
     <div class="columns mt-5 mb-5 p-5">
@@ -57,7 +57,7 @@
               <label class="label">Email</label>
             </div>
             <p v-if="!emailV && email != ''" class="help is-danger">
-              This email is invalid
+               Invalid email
             </p>
           </div>
 
