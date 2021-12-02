@@ -26,7 +26,7 @@
 	"title": "The English Nook",
 	"number": "II",
 	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | Astro | GitHub pages</p>",
-	"description": "<p>Personal website for a translator and english teacher</p>",
+	"description": "<p>Personal website for a translator and English teacher</p>",
 	"github": "https://github.com/dev-fredericfox/theenglishnook.ch",
 	"web": "https://www.theenglishnook.ch"
 },
@@ -34,7 +34,7 @@
 	"title": "Node.js Form Handler",
 	"number": "I",
 	"stack": "<p><b>Node</b></p><p> Node.js | form-handler | Firebase</p>",
-	"description": "<p>Node.js Express app to handle form submits. The repository has been set to private for the moment. You can check out how it works by submiting the contact form on this website (link below).</p>",
+	"description": "<p>Node.js Express app to handle form submits. The repository has been set to private for the moment. You can preview out how it works by submitting the contact form on this website (link below).</p>",
 	"github": "https://github.com/dev-fredericfox/PrivateFormEmailHandler/",
 	"web": "/contact-frederic-fox"
 }]
