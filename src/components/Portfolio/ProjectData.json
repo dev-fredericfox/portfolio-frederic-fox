@@ -1,12 +1,4 @@
 [{
-	"title": "Coming Soon: A node.js project",
-	"number": "V",
-	"stack": "Node.js | Passport</p>",
-	"description": "<p>Coming soon...</p>",
-	"github": "https://github.com/dev-fredericfox/",
-	"web": ""
-},
-{
 	"title": "Brain.js Machine Learning Companion App",
 	"number": "IV",
 	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | JS Workers</p>",
