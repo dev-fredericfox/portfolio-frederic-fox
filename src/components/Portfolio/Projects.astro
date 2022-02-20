@@ -1,5 +1,28 @@
 ---
 const {data} = Astro.props
+
+const githublink = () => {
+  if (data.github.includes('http')) {
+      return <a href="{data.web}">{data.github}</a>
+        } else {
+      return <p>Upon Request</p>
+      }
+}
+
+const GitHubElement = (
+<div class="columns is-centered mt-0 pt-0">
+  <div class="column is-1 is-hidden-mobile"/>
+    <div class="column has-text-centered-mobile has-text-left is-1 pt-0 pb-0 mt-0 mb-0">
+      <p>Repository</p>
+    </div>
+    <div class="column is-hidden-mobile is-1 pt-0 mt-0"/>
+    <div class=" column has-text-centered-mobile has-text-left is-5 pt-0 mt-0 mr-1 ml-1">
+      {githublink()}
+    </div>
+    <div class="column is-1 pt-0 mt-0">
+    </div>
+  </div>
+      );
 ---
 <div class="content pl-5 pr-5">
   <div class="columns is-centered mt-1 mb-0 pt-5">
@@ -14,6 +37,7 @@ const {data} = Astro.props
       <div class="green-line mb-1 ml-2"></div>
     </div>
   </div>
+  
   <div class="columns is-centered mt-0 pt-0">
     <div class="column is-1 is-hidden-mobile"></div>
     <div
@@ -76,37 +100,7 @@ const {data} = Astro.props
     </div>
     <div class="column is-1 pt-0 mt-0"></div>
   </div>
-  <div class="columns is-centered mt-0 pt-0">
-    <div class="column is-1 is-hidden-mobile"></div>
-    <div
-      class="
-        column
-        has-text-centered-mobile has-text-left
-        is-1
-        pt-0
-        pb-0
-        mt-0
-        mb-0
-      "
-    >
-      <p>GitHub</p>
-    </div>
-    <div class="column is-hidden-mobile is-1 pt-0 mt-0"></div>
-    <div
-      class="
-        column
-        has-text-centered-mobile has-text-left
-        is-5
-        pt-0
-        mt-0
-        mr-1
-        ml-1
-      "
-    >
-      <a href="{data.github}">{data.github}</a>
-    </div>
-    <div class="column is-1 pt-0 mt-0"></div>
-  </div>
+    {GitHubElement}
   <div class="columns is-centered mt-0 pt-0">
     <div class="column is-1 is-hidden-mobile"></div>
     <div
@@ -135,8 +129,10 @@ const {data} = Astro.props
       "
     >
       <a href="{data.web}">{data.web}</a>
+      
     </div>
-    <div class="column is-1 pt-0 mt-0"></div>
+    <div class="column is-1 pt-0 mt-0">
+    </div>
   </div>
 </div>
 
