@@ -6,7 +6,7 @@ import {
 	MeshStandardMaterial,
 	PointLight,
 	Scene,
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 class DebugEnvironment extends Scene {
 

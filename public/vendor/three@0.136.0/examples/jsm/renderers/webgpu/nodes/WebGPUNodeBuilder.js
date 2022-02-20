@@ -1,4 +1,4 @@
-import { LinearEncoding } from 'three';
+import { LinearEncoding } from '/vendor/three@0.136.0/build/three.module.js';
 
 import WebGPUNodeUniformsGroup from './WebGPUNodeUniformsGroup.js';
 import {

@@ -3,7 +3,7 @@ import {
 	Matrix4,
 	Raycaster,
 	Vector2
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 const _pointer = new Vector2();
 const _event = { type: '', data: _pointer };

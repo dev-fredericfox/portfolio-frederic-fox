@@ -3,7 +3,7 @@ import {
 	Loader,
 	Matrix4,
 	Vector3
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 import * as fflate from '../libs/fflate.module.js';
 import { Volume } from '../misc/Volume.js';
 

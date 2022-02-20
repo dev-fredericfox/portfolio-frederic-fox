@@ -4,7 +4,7 @@ import {
 	PlaneGeometry,
 	Scene,
 	WebGLRenderTarget
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 import { NodeBuilder } from '../core/NodeBuilder.js';
 import { NodeMaterial } from '../materials/NodeMaterial.js';

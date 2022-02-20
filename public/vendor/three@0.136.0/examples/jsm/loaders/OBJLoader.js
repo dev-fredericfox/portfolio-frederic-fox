@@ -12,7 +12,7 @@ import {
 	Points,
 	PointsMaterial,
 	Vector3
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 // o object_name | g group_name
 const _object_pattern = /^[og]\s*(.+)?/;

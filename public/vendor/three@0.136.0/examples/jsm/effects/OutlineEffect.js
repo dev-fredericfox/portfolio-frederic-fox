@@ -4,7 +4,7 @@ import {
 	ShaderMaterial,
 	UniformsLib,
 	UniformsUtils
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 /**
  * Reference: https://en.wikipedia.org/wiki/Cel_shading

@@ -1,4 +1,4 @@
-import { Vector3, Matrix4 } from 'three';
+import { Vector3, Matrix4 } from '/vendor/three@0.136.0/build/three.module.js';
 
 const inverseProjectionMatrix = new Matrix4();
 

@@ -30,7 +30,7 @@ import {
 	RGB_S3TC_DXT1_Format,
 	sRGBEncoding,
 	UnsignedByteType
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 import { WorkerPool } from '../utils/WorkerPool.js';
 
 const KTX2TransferSRGB = 2;

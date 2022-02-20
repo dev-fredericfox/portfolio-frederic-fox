@@ -6,7 +6,7 @@ import {
 	LineBasicMaterial,
 	Mesh,
 	MeshBasicMaterial
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 /**
  *  This helper must be added as a child of the light

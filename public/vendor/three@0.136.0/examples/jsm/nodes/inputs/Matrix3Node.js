@@ -1,4 +1,4 @@
-import { Matrix3 } from 'three';
+import { Matrix3 } from '/vendor/three@0.136.0/build/three.module.js';
 
 import { InputNode } from '../core/InputNode.js';
 

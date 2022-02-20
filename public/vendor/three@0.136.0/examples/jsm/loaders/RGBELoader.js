@@ -6,7 +6,7 @@ import {
 	LinearEncoding,
 	LinearFilter,
 	RGBFormat,
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 // https://github.com/mrdoob/three.js/issues/5552
 // http://en.wikipedia.org/wiki/RGBE_image_format

@@ -9,7 +9,7 @@ import {
 	RepeatWrapping,
 	TextureLoader,
 	Vector2
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 /**
  * Loads a Wavefront .mtl file specifying materials

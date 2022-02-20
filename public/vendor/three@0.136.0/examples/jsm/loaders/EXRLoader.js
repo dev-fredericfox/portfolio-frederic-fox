@@ -7,7 +7,7 @@ import {
 	LinearFilter,
 	RedFormat,
 	RGBAFormat
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 import * as fflate from '../libs/fflate.module.js';
 
 /**

@@ -3,7 +3,7 @@ import {
 	BufferGeometry,
 	FileLoader,
 	Loader
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 /**
  * See https://github.com/kchapelier/PRWM for more informations about this file format

@@ -8,7 +8,7 @@ import {
 	Skeleton,
 	Vector3,
 	VectorKeyframeTrack
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 /**
  * Description: reads BVH files and outputs a single Skeleton and an AnimationClip

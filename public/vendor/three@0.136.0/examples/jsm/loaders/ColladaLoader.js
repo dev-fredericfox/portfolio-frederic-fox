@@ -37,7 +37,7 @@ import {
 	Vector2,
 	Vector3,
 	VectorKeyframeTrack
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 import { TGALoader } from '../loaders/TGALoader.js';
 
 class ColladaLoader extends Loader {

@@ -4,7 +4,7 @@ import { ShaderNode,
 	pow, mul, add, sub, mix, join,
 	lessThanEqual } from '../ShaderNode.js';
 
-import { LinearEncoding, sRGBEncoding } from 'three';
+import { LinearEncoding, sRGBEncoding } from '/vendor/three@0.136.0/build/three.module.js';
 
 export const LinearToLinear = new ShaderNode( ( inputs ) => {
 

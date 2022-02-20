@@ -3,7 +3,7 @@ import {
 	Vector3,
 	Matrix4,
 	Quaternion,
-} from 'three';
+} from '/vendor/three@0.136.0/build/three.module.js';
 
 /**
  * This is a class to check whether objects are in a selection area in 3D space

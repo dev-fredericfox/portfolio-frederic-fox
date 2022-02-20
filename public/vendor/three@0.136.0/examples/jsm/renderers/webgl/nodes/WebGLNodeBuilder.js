@@ -3,7 +3,7 @@ import SlotNode from './SlotNode.js';
 import GLSLNodeParser from '../../nodes/parsers/GLSLNodeParser.js';
 import WebGLPhysicalContextNode from './WebGLPhysicalContextNode.js';
 
-import { ShaderChunk, LinearEncoding, RGBAFormat, UnsignedByteType, sRGBEncoding } from 'three';
+import { ShaderChunk, LinearEncoding, RGBAFormat, UnsignedByteType, sRGBEncoding } from '/vendor/three@0.136.0/build/three.module.js';
 
 const shaderStages = [ 'vertex', 'fragment' ];
 
