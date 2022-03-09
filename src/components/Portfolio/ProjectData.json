@@ -1,23 +1,31 @@
 [{
+	"title": "Quiz Website with full backend",
+	"number": "VI",
+	"stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Firebase: Auth, Database, Storage, Functions & Hosting </p>",
+"description": "<p>The frontend displays a collection of Buzzfeed-like quizzes, which can be previewed in the demo. The backend is login-protected via Firebase Auth and allows quizzes to be added, paused and deleted. It also enables pictures to be uploaded and removed for individual questions. Preview videos are provided below.</p>",
+	"github": "false",
+	"web": "https://www.kwizify.com",
+	"screenshots": [{"title": "Wrong credentials & successful login", "link": "https://imgur.com/698NL3D"},{"title": "Pause, start & delete quiz", "link": "https://imgur.com/cNQbX2V"},{"title": "Edit quiz & upload new image", "link": "https://imgur.com/a/LFFqk25"}]
+},{
 	"title": "WASM FFmpeg Video Converter",
-	"number": "IV",
-	"stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Vue 3 | Nuxt 3 | Docker | AWS App Runner</p>",
+	"number": "V",
+	"stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Docker | AWS App Runner</p>",
 	"description": "<p>Convert video formats and strip or extract audio with FFmpeg and WebAssembly directly in your browser. No data upload - everything is done locally. Supports files up to 2GB.</p>",
 	"github": "false",
-	"web": "https://www.video-converter-online.eu/"
+	"web": "https://www.video-converter-online.eu"
 },
 	{
 	"title": "Brain.js Machine Learning Companion App",
 	"number": "IV",
-	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | JS Workers | GitHub Pages</p>",
+	"stack": "<p><b>Vue 3</b></p><p> JS Workers | GitHub Pages</p>",
 	"description": "<p>Train machine-learning data in your browser</p>",
 	"github": "https://github.com/dev-fredericfox/pinky",
-	"web": "https://dev-fredericfox.github.io/pinky/"
+	"web": "https://dev-fredericfox.github.io/pinky"
 },
 {
 	"title": "curl Stock Market Quotes",
 	"number": "III",
-	"stack": "<p><b>Express & Node</b></p><p> Express | Node.js</p><p>Firebase | Yahoo! Finance API</p>",
+	"stack": "<p><b>Express & Node</b></p><p>Firebase | Yahoo! Finance API</p>",
 	"description": "<p>Get stock market quotes direclty to your terminal through a <i>curl</i> request.</p><code>curl https://stk.market/TSLA</code><p>It works with any NASDAQ symbol. Don't have a terminal on hand? Visit the website – it works as well!</p>",
 	"github": "false",
 	"web": "https://stk.market/AAPL"
@@ -25,7 +33,7 @@
 {
 	"title": "The English Nook",
 	"number": "II",
-	"stack": "<p><b>Vue 3</b></p><p> Vue 3 | Astro | GitHub pages</p>",
+	"stack": "<p><b>Vue 3</b></p><p> Astro | GitHub pages</p>",
 	"description": "<p>Personal website for a translator and English teacher.</p>",
 	"github": "https://github.com/dev-fredericfox/theenglishnook.ch",
 	"web": "https://www.theenglishnook.ch"
@@ -33,7 +41,7 @@
 {
 	"title": "Node.js Form Handler",
 	"number": "I",
-	"stack": "<p><b>Node</b></p><p> Node.js | form-handler | Firebase</p>",
+	"stack": "<p><b>Node</b></p><p> Nodemailer | Firebase Functions</p>",
 	"description": "<p>Node.js Express app to handle form submits. The repository has been set to private for the moment. You can preview out how it works by submitting the contact form on this website (link below).</p>",
 	"github": "false",
 	"web": "/contact-frederic-fox"

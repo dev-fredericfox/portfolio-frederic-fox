@@ -1,11 +1,12 @@
 ---
 const {data} = Astro.props
+const externalLinkIcon = (<svg class="ml-1" fill="hsla(171, 70%, 51%)" xmlns="http://www.w3.org/2000/svg"  viewBox="0 -3 24 24" width="14px" height="14px"><path d="M 5 3 C 3.9069372 3 3 3.9069372 3 5 L 3 19 C 3 20.093063 3.9069372 21 5 21 L 19 21 C 20.093063 21 21 20.093063 21 19 L 21 12 L 19 12 L 19 19 L 5 19 L 5 5 L 12 5 L 12 3 L 5 3 z M 14 3 L 14 5 L 17.585938 5 L 8.2929688 14.292969 L 9.7070312 15.707031 L 19 6.4140625 L 19 10 L 21 10 L 21 3 L 14 3 z"/></svg>)
 
 const githublink = () => {
   if (data.github.includes('http')) {
-      return <a href="{data.web}">{data.github}</a>
+      return <a href={data.github} target="_blank">{data.github} {externalLinkIcon}</a> 
         } else {
-      return <p>Upon Request</p>
+      return <p>Upon request</p>
       }
 }
 
@@ -23,6 +24,49 @@ const GitHubElement = (
     </div>
   </div>
       );
+
+
+
+const screencaps = () => {
+  if (data.screenshots) {
+    return <div class="columns is-centered mt-0 pt-0">
+    <div class="column is-1 is-hidden-mobile"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-1
+        pt-0
+        pb-0
+        mt-0
+        mb-0
+      "
+    >
+      <p>Examples</p>
+    </div>
+    <div class="column is-hidden-mobile is-1 pt-0 mt-0"></div>
+    <div
+      class="
+        column
+        has-text-centered-mobile has-text-left
+        is-5
+        pt-0
+        mt-0
+        mr-1
+        ml-1
+      "
+    >
+    {data.screenshots.map((screenshot) => {
+      return <div class="mb-0"><a href={screenshot.link} target="_blank"> {screenshot.title}</a>{externalLinkIcon}</div>
+    })}      
+    </div>
+    <div class="column is-1 pt-0 mt-0">
+    </div>
+  </div>
+  }
+}
+
+
 ---
 <div class="content pl-5 pr-5">
   <div class="columns is-centered mt-1 mb-0 pt-5">
@@ -128,12 +172,13 @@ const GitHubElement = (
         ml-1
       "
     >
-      <a href="{data.web}">{data.web}</a>
+      <a href="{data.web}" target="_blank">{data.web} {externalLinkIcon}</a>
       
     </div>
     <div class="column is-1 pt-0 mt-0">
     </div>
   </div>
+  {screencaps()}
 </div>
 
 <style lang="scss">
