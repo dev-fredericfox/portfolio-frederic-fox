@@ -1,8 +1,8 @@
 [{
-	"title": "Quiz Website with full backend",
+	"title": "Quiz Website with full back end",
 	"number": "VI",
 	"stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Firebase: Auth, Database, Storage, Functions & Hosting </p>",
-"description": "<p>The frontend displays a collection of Buzzfeed-like quizzes, which can be previewed in the demo. The backend is login-protected via Firebase Auth and allows quizzes to be added, paused and deleted. It also enables pictures to be uploaded and removed for individual questions. Preview videos are provided below.</p>",
+"description": "<p>The front end displays a collection of Buzzfeed-like quizzes, which can be previewed in the demo. The back end is login-protected via Firebase Auth and allows quizzes to be added, paused and deleted. It also enables pictures to be uploaded and removed for individual questions. Preview videos are provided below.</p>",
 	"github": "false",
 	"web": "https://www.kwizify.com",
 	"screenshots": [{"title": "Wrong credentials & successful login", "link": "https://imgur.com/698NL3D"},{"title": "Pause, start & delete quiz", "link": "https://imgur.com/cNQbX2V"},{"title": "Edit quiz & upload new image", "link": "https://imgur.com/a/LFFqk25"}]
