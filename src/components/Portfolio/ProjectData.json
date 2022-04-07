@@ -1,7 +1,7 @@
 [
   {
     "title": "The Cooking Corner",
-    "number": "VII",
+    "number": "VIII",
     "stack": "<p><b>React & Next.js</b></p><p>PostgreSQL | Next Auth | Vercel | TypeScript</p>",
     "description": "<p>PostgreSQL-based recipe repository built using Next.js. Authentication via Next Auth. Backend uses server-side rendering and frontend is statically generated with on-demand revalidation.</p>",
     "github": "https://github.com/dev-fredericfox/my-recipe-book",
