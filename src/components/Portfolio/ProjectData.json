@@ -1,9 +1,17 @@
 [
   {
+    "title": "The Cooking Corner",
+    "number": "VII",
+    "stack": "<p><b>React & Next.js</b></p><p>PostgreSQL | Next Auth | Vercel | TypeScript</p>",
+    "description": "<p>PostgreSQL-based recipe repository built using Next.js. Authentication via Next Auth. Backend uses server-side rendering and frontend is statically generated with on-demand revalidation.</p>",
+    "github": "https://github.com/dev-fredericfox/my-recipe-book",
+    "web": "https://freds-recipe-book.vercel.app/"
+  },
+  {
     "title": "Connect Four with React",
     "number": "VII",
-    "stack": "<p><b>React</b></p><p> GitHub Pages </p>",
-    "description": "A simple Connect Four game with an 80s Synthwave theme used to learn the basics of React.</p>",
+    "stack": "<p><b>React</b></p><p> GitHub Pages | TypeScript </p>",
+    "description": "<p>A simple Connect Four game with an 80s Synthwave theme used to learn the basics of React.</p>",
     "github": "https://github.com/dev-fredericfox/ReactConnectFour",
     "web": "https://dev-fredericfox.github.io/ReactConnectFour/"
   },
