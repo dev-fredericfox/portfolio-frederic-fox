@@ -1,4 +1,11 @@
 {"work": [{
+	"start": "2022-06-01",
+	"end": "Today",
+	"title": "Freelance IT Engineer",
+	"company":"Brickwise IT Services GmbH",
+	"location": "Vienna, Austria (Remote)",
+	"description": "Fullstack TypeScript Engineering with Vue3, React and Express."
+},{
 		"start": "2021-03-01",
 		"end": "Today",
 		"title": "Marketing Consultant",

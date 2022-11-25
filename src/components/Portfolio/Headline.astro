@@ -1,59 +1,72 @@
 ---
-const frontend = ["JavaScript", "TypeScript", "Vue & Nuxt3", "React & Next.js", "Astro"];
-const backend = ["Node.js", "Express", "Firebase", "MongoDB", "PostgreSQL"];
-const misc = ["Git & CI/CD", "Docker", "Firebase & AWS", "Vercel", "Jest Testing"]
+const frontend = [
+  'TypeScript',
+  'Vue3 & Nuxt3',
+  'React & Next.js',
+  'Webpack  Vite',
+  'C# (Unity)',
+];
+const backend = ['Node.js', 'Express', 'Firebase', 'MongoDB', 'PostgreSQL'];
+const misc = [
+  'Git & CI/CD',
+  'Docker',
+  'Firebase & AWS',
+  'Vercel',
+  'Test Driven Development',
+];
 ---
+
 <div class="content">
-<div class="columns is-hidden-touch p-0 mb-0">
-  <div class="column pr-0 pl-0 is-12 has-text-centered">
-    <h1 class="title is-5">JavaScript Developer</h1>
-    <h2 class="subtitle is-6">Specialisations: Vue 3 & React</h2>
-    <div class="columns is-centered pr-0 pl-0 pt-5 mb-5 mb-0">
-      <div class="column mt-0 pr-0 pl-0 pt-5 is-2 has-text-centered">
-        <p class=""><b>Frontend</b></p>
-         {frontend.map((el) => <p>{el}</p> )}
-      </div>
-      <div class="column mt-0 pr-0 pl-0 pt-5 is-2 has-text-centered">
-        <p class=""><b>Backend</b></p>
-          {backend.map((el) => <p>{el}</p> )}
-      </div>
-      <div class="column mt-0 pr-0 pl-0 pt-5 is-2 has-text-centered">
-        <p class=""><b>Miscellaneous</b></p>
-          {misc.map((el) => <p>{el}</p> )}
+  <div class="columns is-hidden-touch p-0 mb-0">
+    <div class="column pr-0 pl-0 is-12 has-text-centered">
+      <h1 class="title is-5">TypeScript Developer</h1>
+      <h2 class="subtitle is-6">Specialisations: Vue 3 & React</h2>
+      <div class="columns is-centered pr-0 pl-0 pt-5 mb-5 mb-0">
+        <div class="column mt-0 pr-0 pl-0 pt-5 is-2 has-text-centered">
+          <p class=""><b>Frontend</b></p>
+          {frontend.map((el) => <p>{el}</p>)}
+        </div>
+        <div class="column mt-0 pr-0 pl-0 pt-5 is-2 has-text-centered">
+          <p class=""><b>Backend</b></p>
+          {backend.map((el) => <p>{el}</p>)}
+        </div>
+        <div class="column mt-0 pr-0 pl-0 pt-5 is-2 has-text-centered">
+          <p class=""><b>Miscellaneous</b></p>
+          {misc.map((el) => <p>{el}</p>)}
+        </div>
       </div>
     </div>
   </div>
 </div>
-</div>
 
 <div class="columns is-hidden-desktop p-0 mb-0 mt-5 pt-5">
   <div class="column pt-5 pr-0 pl-0 is-12 has-text-centered">
-    <p><b>JavaScript Developer</b></p>
+    <p><b>TypeScript Developer</b></p>
     <div class="columns is-centered pr-0 pl-0 pt-1 mt-0 mb-5 mb-0 is-mobile">
       <div class="column mt-0 pr-0 pl-0 pt-5 is-4 has-text-centered">
-        <p><b>Front End</b></p>
-          {frontend.map((el) => <p>{el}</p> )}
+        <p><b>Frontend</b></p>
+        {frontend.map((el) => <p>{el}</p>)}
       </div>
       <div class="column mt-0 pr-0 pl-0 pt-5 is-4 has-text-centered">
-        <p><b>Back End</b></p>
-          {backend.map((el) => <p>{el}</p> )}
-      </div>
-      </div>
-      <div class="columns is-centered pr-0 pl-0 pt-5 mb-5 mb-0">
-      <div class="column mt-0 pr-0 pl-0 pt-0 is-2 has-text-centered">
-        <p><b>DevOps & Miscellaneous</b></p>
-          {misc.map((el) => <p>{el}</p> )}
-      </div>
+        <p><b>Backend</b></p>
+        {backend.map((el) => <p>{el}</p>)}
       </div>
     </div>
+    <div class="columns is-centered pr-0 pl-0 pt-5 mb-5 mb-0">
+      <div class="column mt-0 pr-0 pl-0 pt-0 is-2 has-text-centered">
+        <p><b>Miscellaneous</b></p>
+        {misc.map((el) => <p>{el}</p>)}
+      </div>
+    </div>
+  </div>
 </div>
 
 <style>
-.subtitle {
-  color: #ffffff;
-}
+  .subtitle {
+    color: #ffffff;
+  }
 
-p {
-  margin: 0 !important;
-}
+  p {
+    margin: 0 !important;
+  }
 </style>
