@@ -1,76 +1,91 @@
-{"work": [{
-	"start": "2022-06-01",
-	"end": "Today",
-	"title": "Freelance IT Engineer",
-	"company":"Brickwise IT Services GmbH",
-	"location": "Vienna, Austria (Remote)",
-	"description": "Fullstack TypeScript Engineering with Vue3, React and Express."
-},{
-		"start": "2021-03-01",
-		"end": "Today",
-		"title": "Marketing Consultant",
-		"company":"Gremco GmbH",
-		"location": "Augsburg, Germany (Remote)",
-		"description": "Following the successful generational transition of my client's enterprise, I am currently helping to set up competitive, B2B digital marketing and sales strategies as well as train employees in day-to-day operations and optimisation processes involving high-impact online marketing campaigns."
-	},
-	{
-		"start": "2018-11-01",
-		"end": "2021-02-27",
-		"title": "Co-Founder / General Manager",
-		"company":"BF International Foods GmbH",
-		"location": "Berlin & Freiburg, Germany",
-		"description": "Operating under the brand name Krakenkind, our company imported and distributed sweets and snacks from around the world. </br>Our online store had a 4.9/5-stars customer satisfaction score and return rate of less than 1%. <br>Key Achievements:<br><ul class=\"brand-lavendar\"><li>Scaled company revenue in just a single year from 40,000€ to 263,000€ with an initial capital of only 25,000€.</li><li>Increased warehousing capacities from 40m² with one employee to 100m2 with five employees.</li><li>Hired, trained and motivated employees, with a final retention rate of 100% owing to a cooperative, performance-driven team structure based on trust and clear task ownsership.</li><li>Increased packing speed by 25% and improved packing accuracy by 40% through the implemention of in-house digital warehouse solutions.</li><li>Increased the website check-out conversion rate by 52% (from 1.5% to 2.3%) and lowered the bounce rate by 23% (from 67% to 52%).</li></ul>"
-	},
-	{
-		"start": "2015-01-01",
-		"end": "2019-05-31",
-		"title": "Co-Founder / General Manager",
-		"company":"Traffic Hunter GmbH",
-		"location": "Berlin, Germany",
-		"description": "We supported companies both in the training of employees and in the planning and execution of 360°, digital advertising and analytics. We helped dozens of clients in different B2C categories to define goals, set up professional ad campaigns and tailor strategies in order to optimize marketing budgets and increase sales, sign-ups and brand recognition. We were also behind the scenes affiliate partner for several large agencies."
-	},
-	{
-		"start": "2012-10-01",
-		"end": "2014-12-31",
-		"title": "Online Marketing Manager",
-		"company":"GameGenetics GmbH",
-		"location": "Berlin, Germany",
-		"description": "Launched and optimised the ROAS of performance marketing campaigns."
-	}],
-"education": [
-	{
-		"start": "2021",
-		"end": "",
-		"title": "Machine Learning",
-		"uni": "Coursera with Stanford Online",
-		"location": "Remote"
-	},
-	{
-		"start": "2020",
-		"end": "",
-		"title": "Web Developer Bootcamp",
-		"uni": "Udemy",
-		"location": "Remote"
-	},
-	{
-		"start": "2020",
-		"end": "",
-		"title": "Modern JavaScript Bootcamp",
-		"uni": "Udemy",
-		"location": "Remote"
-	},
-	{
-		"start": "2009",
-		"end": "- 2011",
-		"title": "Bachelor Degree in Online Marketing and Communications",
-		"uni": "Université Aix-Marseille",
-		"location": "Aix-en-Provence, France"
-	}],
-	"other":  [{
-		"type": "Languages",
-		"description": ["French – Native","German – Native","English – Fluent"]
-	},{
-		"type": "Personal Interests",
-		"description": ["Reading (Science-Fiction & Fantasy)", "Hiking", "Cooking (I love making curries and Udon!)", "Renewable energy & electrification", "Computer hardware & software", "Ethereum"]
-	}]
+{
+  "work": [
+    {
+      "start": "2022-06-01",
+      "end": "Today",
+      "title": "Freelance IT Engineer",
+      "company": "Brickwise IT Services GmbH",
+      "location": "Vienna, Austria (Remote)",
+      "description": "Fullstack TypeScript Engineering with Vue3, React, Express and Mongoose."
+    },
+    {
+      "start": "2021-03-01",
+      "end": "Today",
+      "title": "Marketing Consultant",
+      "company": "Gremco GmbH",
+      "location": "Augsburg, Germany (Remote)",
+      "description": "Following the successful generational transition of my client's enterprise, I am currently helping to set up competitive, B2B digital marketing and sales strategies as well as train employees in day-to-day operations and optimisation processes involving high-impact online marketing campaigns."
+    },
+    {
+      "start": "2018-11-01",
+      "end": "2021-02-27",
+      "title": "Co-Founder / General Manager",
+      "company": "BF International Foods GmbH",
+      "location": "Berlin & Freiburg, Germany",
+      "description": "Operating under the brand name Krakenkind, our company imported and distributed sweets and snacks from around the world. </br>Our online store had a 4.9/5-stars customer satisfaction score and return rate of less than 1%. <br>Key Achievements:<br><ul class=\"brand-lavendar\"><li>Scaled company revenue in just a single year from 40,000€ to 263,000€ with an initial capital of only 25,000€.</li><li>Increased warehousing capacities from 40m² with one employee to 100m2 with five employees.</li><li>Hired, trained and motivated employees, with a final retention rate of 100% owing to a cooperative, performance-driven team structure based on trust and clear task ownsership.</li><li>Increased packing speed by 25% and improved packing accuracy by 40% through the implemention of in-house digital warehouse solutions.</li><li>Increased the website check-out conversion rate by 52% (from 1.5% to 2.3%) and lowered the bounce rate by 23% (from 67% to 52%).</li></ul>"
+    },
+    {
+      "start": "2015-01-01",
+      "end": "2019-05-31",
+      "title": "Co-Founder / General Manager",
+      "company": "Traffic Hunter GmbH",
+      "location": "Berlin, Germany",
+      "description": "We supported companies both in the training of employees and in the planning and execution of 360°, digital advertising and analytics. We helped dozens of clients in different B2C categories to define goals, set up professional ad campaigns and tailor strategies in order to optimize marketing budgets and increase sales, sign-ups and brand recognition. We were also behind the scenes affiliate partner for several large agencies."
+    },
+    {
+      "start": "2012-10-01",
+      "end": "2014-12-31",
+      "title": "Online Marketing Manager",
+      "company": "GameGenetics GmbH",
+      "location": "Berlin, Germany",
+      "description": "Launched and optimised the ROAS of performance marketing campaigns."
+    }
+  ],
+  "education": [
+    {
+      "start": "2021",
+      "end": "",
+      "title": "Machine Learning",
+      "uni": "Coursera with Stanford Online",
+      "location": "Remote"
+    },
+    {
+      "start": "2020",
+      "end": "",
+      "title": "Web Developer Bootcamp",
+      "uni": "Udemy",
+      "location": "Remote"
+    },
+    {
+      "start": "2020",
+      "end": "",
+      "title": "Modern JavaScript Bootcamp",
+      "uni": "Udemy",
+      "location": "Remote"
+    },
+    {
+      "start": "2009",
+      "end": "- 2011",
+      "title": "Bachelor Degree in Online Marketing and Communications",
+      "uni": "Université Aix-Marseille",
+      "location": "Aix-en-Provence, France"
+    }
+  ],
+  "other": [
+    {
+      "type": "Languages",
+      "description": ["French – Native", "German – Native", "English – Fluent"]
+    },
+    {
+      "type": "Personal Interests",
+      "description": [
+        "Reading (Science-Fiction & Fantasy)",
+        "Hiking",
+        "Cooking (I love making curries and Udon!)",
+        "Renewable energy & electrification",
+        "Computer hardware & software",
+        "Ethereum"
+      ]
+    }
+  ]
 }
