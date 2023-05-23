@@ -1,17 +1,17 @@
 {
   "work": [
     {
-      "start": "2022-06-01",
-      "end": "Today",
+      "start": "2022-05-01",
+      "end": "2022-06-30",
       "title": "Freelance IT Engineer",
       "company": "Brickwise IT Services GmbH",
       "location": "Vienna, Austria (Remote)",
-      "description": "Fullstack TypeScript Engineering with Vue3, React, Express and Mongoose."
+      "description": "Fullstack TypeScript Engineering with MongoDB, Express, React, and Node.js (MERN).<ul class=\"brand-lavendar\"><li>Implemented automations for key processes, including PDF generation for contracts, enhancing operational efficiency.</li><li>Developed robust tax computations and automated tax filing systems for Austria and Germany.</li><li>Wrote and improved automated tests with Jest, enhancing system stability and reliability.</li><li>Worked on several internal packages for shared validation and reusable utility functions across our code base.</li><li>Programmed the customer-facing platform with React & Material UI.</li></ul>"
     },
     {
       "start": "2021-03-01",
       "end": "Today",
-      "title": "Marketing Consultant",
+      "title": "Marketing Consultant (Legacy)",
       "company": "Gremco GmbH",
       "location": "Augsburg, Germany (Remote)",
       "description": "Following the successful generational transition of my client's enterprise, I am currently helping to set up competitive, B2B digital marketing and sales strategies as well as train employees in day-to-day operations and optimisation processes involving high-impact online marketing campaigns."
@@ -79,12 +79,12 @@
     {
       "type": "Personal Interests",
       "description": [
+        "Unity game development with C# & data-oriented programming",
         "Reading (Science-Fiction & Fantasy)",
         "Hiking",
         "Cooking (I love making curries and Udon!)",
         "Renewable energy & electrification",
-        "Computer hardware & software",
-        "Ethereum"
+        "Computer hardware & software"
       ]
     }
   ]
