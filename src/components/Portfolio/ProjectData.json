@@ -21,7 +21,7 @@
     "stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Firebase: Auth, Database, Storage, Functions & Hosting </p>",
     "description": "<p>The frontend displays a collection of Buzzfeed-like quizzes, which can be previewed in the demo. The backend is login-protected via Firebase Auth and allows quizzes to be added, paused and deleted. It also enables pictures to be uploaded and removed for individual questions. Preview videos are provided below.</p>",
     "github": "false",
-    "web": "https://www.kwizify.com",
+    "web": "https://quizapp-c1e23.web.app/",
     "screenshots": [
       {
         "title": "Wrong credentials & successful login",
@@ -43,7 +43,7 @@
     "stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Docker | AWS App Runner</p>",
     "description": "<p>Convert video formats and strip or extract audio with FFmpeg and WebAssembly directly in your browser. No data upload - everything is done locally. Supports files up to 2GB.</p>",
     "github": "false",
-    "web": "https://www.video-converter-online.eu"
+    "web": "false"
   },
   {
     "title": "Brain.js Machine Learning Companion App",
