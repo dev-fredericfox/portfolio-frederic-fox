@@ -18,7 +18,7 @@
   {
     "title": "Quiz Website with full backend",
     "number": "VI",
-    "stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Firebase: Auth, Database, Storage, Functions & Hosting </p>",
+    "stack": "<p><b>Vue 3 & Nuxt 3</b></p><p> Firebase: Auth | Database | Storage | Functions | Hosting </p>",
     "description": "<p>The frontend displays a collection of Buzzfeed-like quizzes, which can be previewed in the demo. The backend is login-protected via Firebase Auth and allows quizzes to be added, paused and deleted. It also enables pictures to be uploaded and removed for individual questions. Preview videos are provided below.</p>",
     "github": "false",
     "web": "https://quizapp-c1e23.web.app/",
