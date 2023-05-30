@@ -1,0 +1,420 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover maximum-scale=1.0"><meta name="theme-color" content="rgba(25, 0, 42, 1)" media="(prefers-color-scheme: light)"><meta name="theme-color" content="rgba(25, 0, 42, 1)" media="(prefers-color-scheme: dark)"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"><link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="manifest" href="/site.webmanifest"><link rel="stylesheet" href="/_astro/common-1B9YDI.css" type="text/css"><link rel="stylesheet" href="/_astro/cv-frederic-fox/index-13RT3D.css" type="text/css"></head><body><div class="navbar-menu p-5 astro-F9ZdD1U7"><div class="navbar-start pl-5 astro-F9ZdD1U7"><div class="navbar-item is-flex-direction-column has-text-centered is-align-items-start pl-5 astro-F9ZdD1U7"><div class="brand-white has-text-centered	 astro-F9ZdD1U7"><a href="/" class="astro-F9ZdD1U7">Frederic Fox</a></div><div class="brand-lavendar has-text-centered	 astro-F9ZdD1U7">// Full Stack Developer</div></div></div><div class="navbar-end pr-5 astro-F9ZdD1U7"><a href="/" class="navbar-item p-1 mr-5 astro-F9ZdD1U7">Portfolio</a><a href="/cv-frederic-fox" class="navbar-item p-1 mr-5 has-underline astro-F9ZdD1U7">Curriculum Vitae</a><a href="/contact-frederic-fox" class="navbar-item p-1 mr-5 astro-F9ZdD1U7">Contact</a><a href="/about-frederic-fox" class="navbar-item p-1 mr-5 astro-F9ZdD1U7">About Me</a></div></div><div class="navbar-menu has-background-transparent is-active is-hidden-desktop astro-F9ZdD1U7"><div class="navbar-item has-text-centered astro-F9ZdD1U7"><div class="brand-white astro-F9ZdD1U7">Frederic Fox<span class="brand-lavendar ml-4 astro-F9ZdD1U7">// Full Stack Developer</span></div></div><div class="is-flex navbar-item is-flex-direction-row	is-justify-content-space-evenly astro-F9ZdD1U7"><a href="/" class="has-text-centered p-1 astro-F9ZdD1U7">Portfolio</a><a href="/cv-frederic-fox" class="has-text-centered p-1 has-underline astro-F9ZdD1U7">Curriculum Vitae</a><a href="/contact-frederic-fox" class="has-text-centered p-1 astro-F9ZdD1U7">Contact</a><a href="/about-frederic-fox" class="has-text-centered p-1 astro-F9ZdD1U7">About Me</a></div></div><main class="astro-hRP7YS6j"><div class="columns responsive-spacer is-fullhd astro-hRP7YS6j"></div><canvas id="bg" class="astro-s2Uykahq"></canvas><script type="module">
+  import * as THREE from '/vendor/three@0.136.0/build/three.module.js';
+  import { OrbitControls } from 'https://cdn.skypack.dev/three@v0.136.0/examples/jsm/controls/OrbitControls';
+  import {
+    Lensflare,
+    LensflareElement,
+  } from 'https://cdn.skypack.dev/three@v0.136.0/examples/jsm/objects/Lensflare.js';
+  import * as BufferGeometryUtils from 'https://cdn.skypack.dev/three@v0.136.0/examples/jsm/utils/BufferGeometryUtils.js';
+  import { OBJLoader } from 'https://cdn.skypack.dev/three@v0.136.0/examples/jsm/loaders/OBJLoader.js';
+  import { MTLLoader } from 'https://cdn.skypack.dev/three@v0.136.0/examples/jsm/loaders/MTLLoader.js';
+
+
+
+  const main = function () {
+    // Setup
+    const canvas = document.querySelector('#bg');
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true});
+    const scene = new THREE.Scene();
+
+
+      // Setup > Objects > Lead Textures
+  const textureLoader = new THREE.TextureLoader();
+  const textures = {
+    background: textureLoader.load('/assets/cv/textures/BackgroundFor3DPlanets1000x1000.png', () => setBgSize()),
+    planet: textureLoader.load('/assets/cv/textures/PlanetTexture_small-min.png'),
+    moon: textureLoader.load('/assets/cv/textures/MoonTexture_small-min.png'),
+    giant: textureLoader.load('/assets/cv/textures/gasgiant_small-min.jpg'),
+    ice: textureLoader.load('/assets/cv/textures/iceTexture_small-min.jpeg'),
+    textureFlare0: textureLoader.load('/assets/cv/lensflare/lensflare0.png'),
+    textureFlare1: textureLoader.load('/assets/cv/lensflare/lensflare1.png'),
+    textureFlare2: textureLoader.load('/assets/cv/lensflare/lensflare2.png'),
+    textureFlare2b: textureLoader.load('/assets/cv/lensflare/lensflare2b.png'),
+    textureFlare3: textureLoader.load('/assets/cv/lensflare/lensflare3.png'),
+  };
+  const objLoader = new OBJLoader();
+  const mtlLoader = new MTLLoader();
+
+    const bgTexture = textures.background;
+    scene.background = bgTexture;
+    bgTexture.wrapS = THREE.RepeatWrapping;
+    bgTexture.wrapT = THREE.RepeatWrapping;
+    let windowX = window.innerWidth;
+    let windowY = window.innerHeight;
+
+  const setBgSize = () => {
+    if (windowX !== window.innerWidth) {
+      windowX = window.innerWidth;
+    }
+    if (windowY !== window.innerHeight) {
+      windowY = window.innerHeight;
+    }
+    if (bgTexture.image) {
+    bgTexture.repeat.x = windowX / bgTexture.image.width
+    bgTexture.repeat.y = windowY / bgTexture.image.height
+    }
+  }
+    
+
+    // Setup > Camera
+    const fov = 40;
+    const aspect = window.innerWidth / window.innerHeight;
+    const near = 0.1;
+    const far = 2000;
+    const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.left = -canvas.width / 2;
+    camera.right = canvas.width / 2;
+    camera.top = canvas.height / 2;
+    camera.bottom = -canvas.height / 2;
+    camera.position.set(0, 80, 2)
+    camera.up.set(0, 0.01, 1);
+    // Setup > Light > Directional Light
+    const directionalLightColor = 0xffffff;
+    let directionalLightIntensity = 0.9;
+    const directionalLight = new THREE.DirectionalLight(
+      directionalLightColor,
+      directionalLightIntensity
+    );
+    directionalLight.position.x = -340;
+    directionalLight.position.y = -800;
+    directionalLight.position.z = 20;
+    // Setup > Light > Shadows
+    renderer.shadowMap.enabled = true;
+    directionalLight.castShadow = false;
+    directionalLight.target.position.set(200, 50, 200);
+    scene.add(directionalLight);
+
+    scene.add(directionalLight.target);
+    // Setup > Light > Ambient Light
+    const ambientLightcolor = 0xffffff;
+    const ambientLightintensity = 0.3;
+    const ambientLight = new THREE.AmbientLight(
+      ambientLightcolor,
+      ambientLightintensity
+    );
+    scene.add(ambientLight);
+
+    // Setup > Light > Point Light (Fake Sun)
+    const pointLightColor = 0xffffff;
+    const pointLightIntensity = 3.5;
+    const pointLightDistance = 2000;
+    const pointLight = new THREE.PointLight(
+      pointLightColor,
+      pointLightIntensity,
+      pointLightDistance
+    );
+    pointLight.position.x = -140;
+    pointLight.position.y = -900;
+    pointLight.position.z = 20;
+    pointLight.castShadow = true;
+    scene.add(pointLight);
+
+    // Setup > Light > Point Light > Lensflare
+    const lensflare = new Lensflare();
+    lensflare.addElement(new LensflareElement(textures.textureFlare0, 100, 0));
+    lensflare.addElement(new LensflareElement(textures.textureFlare2, 800, 0));
+    lensflare.addElement(new LensflareElement(textures.textureFlare2b, 400, 0));
+    lensflare.addElement(new LensflareElement(textures.textureFlare3, 70, 0.7));
+    lensflare.addElement(new LensflareElement(textures.textureFlare3, 60, 0.6));
+    lensflare.addElement(
+      new LensflareElement(textures.textureFlare3, 120, 0.9)
+    );
+    lensflare.addElement(new LensflareElement(textures.textureFlare3, 70, 1));
+    pointLight.add(lensflare);
+
+    // Setup > Helpers
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enabled = false;
+    // const helper = {
+    //   light: new THREE.DirectionalLightHelper(directionalLight),
+    //   point: new THREE.PointLightHelper(pointLight),
+    //   grid: new THREE.GridHelper(200, 50),
+    //   camera: new THREE.CameraHelper(directionalLight.shadow.camera),
+    // };
+    // scene.add(helper.light, helper.point, helper.grid);
+    // scene.add(helper.camera);
+
+    // Setup > Objects
+    const objects = [];
+    const manyObjects = [];
+    const staticObjects = [];
+    const geometries = [];
+    const asteroidsObjects = []
+    // Setup > Scenes
+    // Setup > Scene > SolarSystem (sun)
+    const world = new THREE.Object3D();
+    scene.add(world)
+    const solarSystem = new THREE.Object3D();
+    world.add(solarSystem);
+    solarSystem.rotation.y = 0.14;
+    solarSystem.position.x = 14;
+    staticObjects.push(solarSystem);
+    // Setup > Scene > Planet System (planet, moon)
+    const planetSystem = new THREE.Object3D();
+    world.add(planetSystem);
+    planetSystem.rotation.y = 0.14;
+    planetSystem.position.x = 14;
+    objects.push(planetSystem);
+    // Setup > Scene > Rings
+    const ringSystem = new THREE.Object3D();
+    planetSystem.add(ringSystem);
+    manyObjects.push(ringSystem);
+    // Setup > Scene > Asteroids
+    const asteroidSystem = new THREE.Object3D();
+    world.add(asteroidSystem)
+    asteroidSystem.position.y = 200;
+    asteroidSystem.position.x = -5;
+    asteroidSystem.position.z = 5;
+    // Setup > Scene > Giant
+    const giantSystem = new THREE.Object3D();
+    giantSystem.position.x = 60;
+    giantSystem.position.y = 330;
+    giantSystem.position.z = 0;
+    world.add(giantSystem);
+
+        // Setup > Scene > Imported Objects (blender)
+     mtlLoader.load('/assets/cv/models/AsteroidOne.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+  objLoader.load('/assets/cv/models/Asteroid_01.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+     objLoader.load('/assets/cv/models/Asteroid_02.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+        objLoader.load('/assets/cv/models/Asteroid_03.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+        objLoader.load('/assets/cv/models/Asteroid_04.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+        objLoader.load('/assets/cv/models/Asteroid_05.obj', (asteroid) => {
+    asteroidSystem.add(asteroid);
+    asteroidsObjects.push(asteroid)
+   });
+  });
+  
+
+    // Setup > Objects > *Planet*
+    const planet = {
+      radius: 5,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+    const planetGeometry = new THREE.SphereGeometry(
+      planet.radius,
+      planet.widthSegments,
+      planet.heightSegments
+    );
+    const planetMaterial = new THREE.MeshLambertMaterial({
+      map: textures.planet,
+      emissiveIntensity: 0,
+    });
+    const planetMesh = new THREE.Mesh(planetGeometry, planetMaterial);
+    planetMesh.castShadow = true;
+    planetMesh.receiveShadow = true;
+    planetMesh.scale.set(1, 1, 1);
+    planetMesh.rotation.x = 5;
+    planetSystem.add(planetMesh);
+    objects.push(planetMesh);
+
+    // Setup > Objects > Moon
+    const moon = {
+      radius: 1,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+    const moonGeometry = new THREE.SphereGeometry(
+      moon.radius,
+      moon.widthSegments,
+      moon.heightSegments
+    );
+    const moonMaterial = new THREE.MeshLambertMaterial({
+      map: textures.moon,
+      color: 0xffff00,
+    });
+    const moonCoreMaterial = new THREE.MeshPhongMaterial({
+      color: 0x000000,
+    });
+    const moonMesh = new THREE.Mesh(moonGeometry, moonMaterial);
+    const moonCoreMesh = new THREE.Mesh(moonGeometry, moonCoreMaterial);
+    moonCoreMesh.scale.set(0.9, 0.9, 0.9);
+    moonMesh.position.x = -40;
+    moonCoreMesh.position.x = -40;
+    moonMesh.receiveShadow = true;
+    solarSystem.add(moonMesh);
+    solarSystem.add(moonCoreMesh);
+    objects.push(moonMesh);
+    objects.push(moonCoreMesh);
+
+    // Setup > Objects > Gas Giant
+    const giant = {
+      radius: 30,
+      widthSegment: 32,
+      heightSegment: 16,
+    };
+
+    const giantGeometry = new THREE.SphereGeometry(
+      giant.radius,
+      giant.widthSegments,
+      giant.heightSegments
+    );
+
+    const giantMaterial = new THREE.MeshLambertMaterial({
+      map: textures.giant,
+      emissiveIntensity: 0,
+    });
+    const giantMesh = new THREE.Mesh(giantGeometry, giantMaterial);
+    giantMesh.castShadow = true;
+    giantMesh.receiveShadow = false;
+    giantMesh.scale.set(1, 1, 1);
+    giantMesh.rotation.x = 14;
+    giantSystem.add(giantMesh);
+    objects.push(giantMesh);
+
+    // Setup > Objects > *Asteroid* > Material & Mesh
+    const asteroidMaterial = new THREE.MeshPhongMaterial({
+      color: 0xd6f9ff,
+      shininess: 200,
+    });
+
+    /////// Ad ring bis
+    // We can rotate the lon helper on its Y axis to the longitude
+    const lonHelper = new THREE.Object3D();
+    scene.add(lonHelper);
+    // We rotate the latHelper on its X axis to the latitude
+    // The position helper moves the object to the edge of the sphere
+    const positionHelper = new THREE.Object3D();
+    positionHelper.position.z = 0;
+
+    lonHelper.add(positionHelper);
+    // Used to move the center of the box so it scales from the position Z axis
+    const originHelper = new THREE.Object3D();
+    originHelper.position.z = 10.5;
+    originHelper.position.x = 10;
+    originHelper.position.y = 0;
+    positionHelper.add(originHelper);
+    const randomAngle = () => Math.round(Math.random() * 360);
+    const randomScale = () => (Math.round(Math.random() + 5) * 20) / 2000;
+    const randomPosition = () => 7.2 + Math.round(Math.random() * 8) / 10;
+
+    const addRing = function () {
+      for (let i = 0; i < 1200; i++) {
+        const asteroid = {
+          radius: Math.round(Math.random() * 9) / 10,
+          detail: 0,
+        };
+        const asteroidGeometries = {
+          DodecahedronGeometry: new THREE.DodecahedronGeometry(
+            asteroid.radius,
+            asteroid.detail
+          ),
+          IcosahedronGeometry: new THREE.IcosahedronGeometry(
+            asteroid.radius,
+            asteroid.detail
+          ),
+        };
+        const geometry =
+          i % 2 == 0
+            ? asteroidGeometries.DodecahedronGeometry
+            : asteroidGeometries.IcosahedronGeometry;
+        lonHelper.rotation.y = randomAngle();
+        positionHelper.position.x = randomPosition();
+        lonHelper.rotation.x = 1.5;
+        positionHelper.scale.set(randomScale(), randomScale(), randomScale());
+        originHelper.updateWorldMatrix(true, false);
+        geometry.applyMatrix4(originHelper.matrixWorld);
+
+        geometries.push(geometry);
+      }
+    };
+    addRing();
+    const mergedGeometry = BufferGeometryUtils.mergeBufferGeometries(
+      geometries,
+      false
+    );
+    const asteroidMesh = new THREE.Mesh(mergedGeometry, asteroidMaterial);
+    asteroidMesh.receiveShadow = true;
+    planetSystem.add(asteroidMesh);
+
+    // Setup Responsive Display
+    function resizeRendererToDisplaySize(renderer) {
+      const canvas = renderer.domElement;
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const needResize = canvas.width !== width || canvas.height !== height;
+      if (needResize) {
+        renderer.setSize(width, height, false);
+      }
+      return needResize;
+    }
+
+    // Move Camera with Scoll
+    const moveCamera = function () {
+      const userPosition = document.body.getBoundingClientRect().top <= 0 ? document.body.getBoundingClientRect().top : 0 ;
+      if (window.innerWidth < 600) {
+        world.position.y = (userPosition+120)*0.5 ;
+        world.position.z = (userPosition+20)*0.01;
+        world.position.x = (userPosition+360)*-0.02;
+      } else {
+        world.position.y = (userPosition+130)*0.5 ;
+        world.position.z = userPosition*0.01;
+        world.position.x = (userPosition)*-0.05;
+      }
+    };
+
+    document.body.onscroll = moveCamera;
+    moveCamera();
+const resizeCanvas = () => {
+          if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        setBgSize()
+      }
+}
+
+    // Recusrive function
+    function render(time) {
+      time *= 0.001;
+
+      resizeCanvas()
+        asteroidsObjects.forEach((obj) => {
+          obj.rotation.z = time * 0.08;
+          obj.rotation.x = time * 0.02;
+          obj.rotation.y = time * 0.05;
+        });
+
+      solarSystem.rotation.z = time * 0.2;
+      planetSystem.rotation.z = time * 0.02;
+      giantSystem.rotation.z = time * 0.05;
+      asteroidSystem.rotation.z = time * 0.05;
+      asteroidSystem.rotation.x = time * 0.2;
+      asteroidSystem.rotation.y = time * 0.02;
+      // mesh.rotation.z = time*0.5;
+      renderer.render(scene, camera);
+
+      // Helper for Developement (mouse move around scene)
+      controls.update();
+
+      requestAnimationFrame(render);
+    }
+
+    requestAnimationFrame(render);
+  };
+
+  main();
+</script><div class="overlay astro-OR4XERz5"><div class="content pl-5 pr-5 astro-tgcPECWv" id="cv-content"><div class="columns astro-tgcPECWv"><div class="column is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-hidden-touch is-3 astro-tgcPECWv"></div><div class="column is-9 is-8-fullhd mb-0 has-text-centered-mobile astro-tgcPECWv"><h1 class="title brand-green is-5 mb-0 astro-tgcPECWv">Work Experience</h1></div></div></div></div><div class="columns astro-tgcPECWv"><div class="column is-hidden-touch is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 has-text-centered-mobile astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">May 2022 - Jun 2023</p><p class="brand-lavendar location astro-tgcPECWv">Vienna, Austria (Remote)</p></div><div class="column is-9 is-7-fullhd mb-1 astro-tgcPECWv"><p class="job brand-orange mb-0 has-text-centered-mobile astro-tgcPECWv"><b class="astro-tgcPECWv">Freelance IT Engineer</b></p><p class="company brand-lavendar mb-1 has-text-centered-mobile astro-tgcPECWv">Brickwise IT Services GmbH</p><p class="brand-lavendar has-text-justified-mobile astro-tgcPECWv">Fullstack TypeScript Engineering with MongoDB, Express, React, and Node.js (MERN).</p><ul class="brand-lavendar"><li>Implemented automations for key processes, including PDF generation for contracts, enhancing operational efficiency.</li><li>Developed robust tax computations and automated tax filing systems for Austria and Germany.</li><li>Wrote and improved automated tests with Jest, enhancing system stability and reliability.</li><li>Worked on several internal packages for shared validation and reusable utility functions across our code base.</li><li>Programmed the customer-facing platform with React &amp; Material UI.</li></ul><p></p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 has-text-centered-mobile astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">Mar 2021 - Today</p><p class="brand-lavendar location astro-tgcPECWv">Augsburg, Germany (Remote)</p></div><div class="column is-9 is-7-fullhd mb-1 astro-tgcPECWv"><p class="job brand-orange mb-0 has-text-centered-mobile astro-tgcPECWv"><b class="astro-tgcPECWv">Marketing Consultant (Legacy)</b></p><p class="company brand-lavendar mb-1 has-text-centered-mobile astro-tgcPECWv">Gremco GmbH</p><p class="brand-lavendar has-text-justified-mobile astro-tgcPECWv">Following the successful generational transition of my client's enterprise, I am currently helping to set up competitive, B2B digital marketing and sales strategies as well as train employees in day-to-day operations and optimisation processes involving high-impact online marketing campaigns.</p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 has-text-centered-mobile astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">Nov 2018 - Feb 2021</p><p class="brand-lavendar location astro-tgcPECWv">Berlin &amp; Freiburg, Germany</p></div><div class="column is-9 is-7-fullhd mb-1 astro-tgcPECWv"><p class="job brand-orange mb-0 has-text-centered-mobile astro-tgcPECWv"><b class="astro-tgcPECWv">Co-Founder / General Manager</b></p><p class="company brand-lavendar mb-1 has-text-centered-mobile astro-tgcPECWv">BF International Foods GmbH</p><p class="brand-lavendar has-text-justified-mobile astro-tgcPECWv">Operating under the brand name Krakenkind, our company imported and distributed sweets and snacks from around the world. <br>Our online store had a 4.9/5-stars customer satisfaction score and return rate of less than 1%. <br>Key Achievements:<br></p><ul class="brand-lavendar"><li>Scaled company revenue in just a single year from 40,000€ to 263,000€ with an initial capital of only 25,000€.</li><li>Increased warehousing capacities from 40m² with one employee to 100m2 with five employees.</li><li>Hired, trained and motivated employees, with a final retention rate of 100% owing to a cooperative, performance-driven team structure based on trust and clear task ownsership.</li><li>Increased packing speed by 25% and improved packing accuracy by 40% through the implemention of in-house digital warehouse solutions.</li><li>Increased the website check-out conversion rate by 52% (from 1.5% to 2.3%) and lowered the bounce rate by 23% (from 67% to 52%).</li></ul><p></p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 has-text-centered-mobile astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">Jan 2015 - May 2019</p><p class="brand-lavendar location astro-tgcPECWv">Berlin, Germany</p></div><div class="column is-9 is-7-fullhd mb-1 astro-tgcPECWv"><p class="job brand-orange mb-0 has-text-centered-mobile astro-tgcPECWv"><b class="astro-tgcPECWv">Co-Founder / General Manager</b></p><p class="company brand-lavendar mb-1 has-text-centered-mobile astro-tgcPECWv">Traffic Hunter GmbH</p><p class="brand-lavendar has-text-justified-mobile astro-tgcPECWv">We supported companies both in the training of employees and in the planning and execution of 360°, digital advertising and analytics. We helped dozens of clients in different B2C categories to define goals, set up professional ad campaigns and tailor strategies in order to optimize marketing budgets and increase sales, sign-ups and brand recognition. We were also behind the scenes affiliate partner for several large agencies.</p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 has-text-centered-mobile astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">Oct 2012 - Dec 2014</p><p class="brand-lavendar location astro-tgcPECWv">Berlin, Germany</p></div><div class="column is-9 is-7-fullhd mb-1 astro-tgcPECWv"><p class="job brand-orange mb-0 has-text-centered-mobile astro-tgcPECWv"><b class="astro-tgcPECWv">Online Marketing Manager</b></p><p class="company brand-lavendar mb-1 has-text-centered-mobile astro-tgcPECWv">GameGenetics GmbH</p><p class="brand-lavendar has-text-justified-mobile astro-tgcPECWv">Launched and optimised the ROAS of performance marketing campaigns.</p></div></div></div></div><div class="columns astro-tgcPECWv"><div class="column is-hidden-touch is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-hidden-touch is-3 astro-tgcPECWv"></div><div class="column is-9 is-8-fullhd mb-0 has-text-centered-mobile astro-tgcPECWv"><h1 class="title brand-green is-5 mb-0 astro-tgcPECWv">Education</h1></div></div></div></div><div class="columns astro-tgcPECWv"><div class="column is-hidden-touch is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd has-text-centered-mobile astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">2021</p><p class="brand-lavendar location astro-tgcPECWv">Remote</p></div><div class="column is-9 is-8-fullhd astro-tgcPECWv"><p class="job brand-orange mb-0 astro-tgcPECWv"><b class="astro-tgcPECWv">Machine Learning</b></p><p class="company brand-lavendar astro-tgcPECWv">Coursera with Stanford Online</p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">2020</p><p class="brand-lavendar location astro-tgcPECWv">Remote</p></div><div class="column is-9 is-8-fullhd astro-tgcPECWv"><p class="job brand-orange mb-0 astro-tgcPECWv"><b class="astro-tgcPECWv">Web Developer Bootcamp</b></p><p class="company brand-lavendar astro-tgcPECWv">Udemy</p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">2020</p><p class="brand-lavendar location astro-tgcPECWv">Remote</p></div><div class="column is-9 is-8-fullhd astro-tgcPECWv"><p class="job brand-orange mb-0 astro-tgcPECWv"><b class="astro-tgcPECWv">Modern JavaScript Bootcamp</b></p><p class="company brand-lavendar astro-tgcPECWv">Udemy</p></div></div><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 astro-tgcPECWv"><p class="mb-0 astro-tgcPECWv">2009- 2011</p><p class="brand-lavendar location astro-tgcPECWv">Aix-en-Provence, France</p></div><div class="column is-9 is-8-fullhd astro-tgcPECWv"><p class="job brand-orange mb-0 astro-tgcPECWv"><b class="astro-tgcPECWv">Bachelor Degree in Online Marketing and Communications</b></p><p class="company brand-lavendar astro-tgcPECWv">Université Aix-Marseille</p></div></div></div></div><div class="columns astro-tgcPECWv"><div class="column is-hidden-touch is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-hidden-touch is-3 astro-tgcPECWv"></div><div class="column is-9 is-8-fullhd mb-0 has-text-centered-mobile astro-tgcPECWv"><h1 class="title brand-green is-5 mb-0 astro-tgcPECWv">Personal</h1></div></div></div></div><div class="columns mb-5 astro-tgcPECWv"><div class="column is-hidden-touch is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 astro-tgcPECWv"><p class="mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Languages</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">French – Native</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">German – Native</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">English – Fluent</p></div><div class="column is-9 is-8-fullhd astro-tgcPECWv"><p class="job brand-orange mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv"><b class="astro-tgcPECWv">Personal Interests</b></p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Unity game development with C# &amp; data-oriented programming</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Reading (Science-Fiction &amp; Fantasy)</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Hiking</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Cooking (I love making curries and Udon!)</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Renewable energy &amp; electrification</p><p class="brand-lavendar location mb-0 mt-0 has-text-centered-mobile astro-tgcPECWv">Computer hardware &amp; software</p></div></div></div></div></div><div class="columns mb-5 astro-tgcPECWv"><div class="column is-hidden-touch is-3-desktop is-6-fullhd astro-tgcPECWv"></div><div class="column is-9-desktop is-6-fullhd astro-tgcPECWv"><div class="columns mb-0 astro-tgcPECWv"><div class="column is-3 astro-tgcPECWv"></div><div class="column is-9 is-8-fullhd has-text-centered-mobile astro-tgcPECWv"><astro-root uid="2gwy3j"><div data-v-140417d5=""><button class="button is-small" data-v-140417d5="">Hide Text</button></div></astro-root>
+<script type="module">
+import setup from '/_astro_frontend/hydrate/idle.js';
+setup("2gwy3j", {}, async () => {
+  
+  const [{ default: Component }, { default: hydrate }] = await Promise.all([import("/_astro/src/components/CV/Button.vue.js"), import("/_snowpack/pkg/@astrojs.renderer-vue.client.v0.1.9.js")]);
+  return (el, children) => hydrate(el)(Component, {}, children);
+
+});
+</script></div></div></div></div><div id="footer" class="columns is-centered m-0 astro-n31rkg6Y"><div class="column has-text-centered is-narrow astro-n31rkg6Y"><a class="brand-lavendar astro-n31rkg6Y" href="/imprint">Imprint</a><span class="brand-lavendar astro-n31rkg6Y"> | </span><a class="brand-lavendar astro-n31rkg6Y" href="/privacy">Data Protection</a></div></div></div></main></body></html>
